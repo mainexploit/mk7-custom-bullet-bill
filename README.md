@@ -2,16 +2,16 @@
 A **CTRPluginFramework-RevolutionBase** plugin for **Mario Kart 7**.
 
 > [!TIP]
-> This project is strictly for educational purposes.
+> This project is strictly for educational purposes.\
 > Any questions? DM me on Discord: `h4x0rspooky`.
 
 ## Compatibility
-MARIO KART 7 USA and EUR on the latest update v1.2.
-> Theoretically any version should work.
+MARIO KART 7 USA and EUR on the latest update v1.2.\
+Theoretically any version and revision should work.
 
 ## Build
 > [!NOTE]
-> The `libctrpf` included is a modified version to fix numerous issues.
+> The `libctrpf` included is a modified version to fix numerous issues.\
 > You would still want to install `libctrpf` through pacman though.
 
 - [git](https://git-scm.com/downloads)
