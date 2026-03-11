@@ -18,11 +18,8 @@ endif
 
 TARGET		:= 	$(notdir $(CURDIR))
 
-CTRPFLIB	:=	$(TOPDIR)/libctrpf
-
-ifeq ($(wildcard CTRPFLIB),)
-CTRPFLIB	:=	$(DEVKITPRO)/libctrpf
-endif
+CTRPFLIB	:=	libctrpf
+#CTRPFLIB	:=	$(DEVKITPRO)/libctrpf
 
 PLGINFO 	:= 	ctrpf.plgInfo
 
