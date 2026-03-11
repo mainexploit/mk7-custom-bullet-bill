@@ -18,9 +18,11 @@ endif
 
 TARGET		:= 	$(notdir $(CURDIR))
 
-CTRPFLIB	:=	$(TOPDIR)/libctrpf
-#CTRPFLIB	:=	$(DEVKITPRO)/libctrpf
+MAX			:=	5
+JOBS		:=	$(shell nproc)
+JOBS		:=	$(if $(shell [ $(JOBS) -gt $(MAX) ] && echo 1),$(MAX),$(JOBS))
 
+CTRPFLIB	:=	$(TOPDIR)/libctrpf
 PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
@@ -118,24 +120,20 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 #---------------------------------------------------------------------------------
 all: $(BUILD)
 
-$(BUILD): update_submodules produce_includes rm_leftovers
-	@[ -d $(DEBUG) ] || mkdir -p $(DEBUG)
-	@[ -d $@ ] || mkdir -p $@
-	@$(MAKE) -j10 --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-
-update_submodules:
-	@git submodule update --init --recursive
-
-produce_includes:
-	@$(MAKE) --no-print-directory -C vendor/mk7-memory
-
-rm_leftovers:
+$(BUILD): fetch_submodules
 	@rm -fr $(DEBUG) *.3gx
+	@mkdir -p $(DEBUG)
+	@[ -d $@ ] || mkdir -p $@
+	@$(MAKE) --jobs=$(JOBS) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
+
+fetch_submodules:
+	@git submodule update --init --recursive
+	@$(MAKE) --jobs=$(JOBS) --no-print-directory -C $(CURDIR)/vendor/mk7-memory -s
 
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(DEBUG) $(BUILD) $(OUTPUT).3gx
+	@rm -fr $(BUILD) $(DEBUG) *.3gx
 
 re: clean all
 
