@@ -121,13 +121,16 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 #---------------------------------------------------------------------------------
 all: $(BUILD)
 
-$(BUILD): rm_leftovers
+$(BUILD): rm_leftovers produce_includes
 	@[ -d $(DEBUG) ] || mkdir -p $(DEBUG)
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) -j10 --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
 rm_leftovers:
 	@rm -fr $(DEBUG) *.3gx
+
+produce_includes:
+	@$(MAKE) --no-print-directory -C vendor/mk7-memory
 
 #---------------------------------------------------------------------------------
 clean:

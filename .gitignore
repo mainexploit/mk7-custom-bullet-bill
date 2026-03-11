@@ -1,6 +1,5 @@
 build
 debug
-vendor
 *.3gx
 .vscode
 *.code-workspace
