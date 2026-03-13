@@ -62,7 +62,7 @@ namespace base
         bool is_citra = CTRPluginFramework::System::IsCitra();
 
         m_item_cycler_entry->Note() = std::format("\nCycle Items: {} & {}\n\nClear Item: {}",
-            (is_citra ? "D-Pad Left" : FONT_DL), (is_citra ? "D-Pad Right" : FONT_DR), (is_citra ? "D-Pad Down" : FONT_DD));;
+            (is_citra ? "D-Pad Left" : FONT_DL), (is_citra ? "D-Pad Right" : FONT_DR), (is_citra ? "D-Pad Down" : FONT_DD));
 
         m_drop_equip_entry->Note() = std::format("\n\nDrop Equipment: {}", (is_citra ? "X" : FONT_X));
 
