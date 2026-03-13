@@ -5,14 +5,10 @@
 #include <base/settings.hpp>
 
 #include <Unicode.h>
+#include <format>
 
 #define DEFAULT_ENTRY [](MenuEntry *) {}
 #define MENU_TYPE 1
-
-#define ITEM_CYCLER_NOTE "\nCycle Items: " FONT_DL " & " FONT_DR "\n\nClear Item: " FONT_DD
-#define DROP_EQUIP_NOTE "\n\nDrop Equipment: " FONT_X
-#define CLEAR_ITEMS_NOTE "\n\nVanish Items: " FONT_Y
-#define DEBUG_ITEM_KILLER_NOTE "\nEquippable Item: " FONT_ZR "\nThrowable Item: " FONT_ZL "\nTrailing Item: " FONT_DU "\nItem Rain: " FONT_R
 
 namespace base
 {
@@ -22,10 +18,10 @@ namespace base
     :
         m_plugin_menu(new PluginMenu(NAME, ABOUT, MENU_TYPE)),
 
-        m_item_cycler_entry(new MenuEntry("Item Cycler", entries::item_cycler, ITEM_CYCLER_NOTE)),
-        m_drop_equip_entry(new MenuEntry("Drop Equip", entries::drop_equip, DROP_EQUIP_NOTE)),
-        m_clear_all_items_entry(new MenuEntry("Clear All Items", entries::clear_all_items, CLEAR_ITEMS_NOTE)),
-        m_debug_item_killer_entry(new MenuEntry("Debug itemKiller", entries::debug_item_killer, DEBUG_ITEM_KILLER_NOTE))
+        m_item_cycler_entry(new MenuEntry("Item Cycler", entries::item_cycler)),
+        m_drop_equip_entry(new MenuEntry("Drop Equip", entries::drop_equip)),
+        m_clear_all_items_entry(new MenuEntry("Clear All Items", entries::clear_all_items)),
+        m_debug_item_killer_entry(new MenuEntry("Debug itemKiller", entries::debug_item_killer))
     {
         m_plugin_menu->SynchronizeWithFrame(true);
         m_plugin_menu->ShowWelcomeMessage(false);
@@ -63,6 +59,18 @@ namespace base
 
     void menu::finalize()
     {
+        bool is_citra = CTRPluginFramework::System::IsCitra();
+
+        m_item_cycler_entry->Note() = std::format("\nCycle Items: {} & {}\n\nClear Item: {}",
+            (is_citra ? "D-Pad Left" : FONT_DL), (is_citra ? "D-Pad Right" : FONT_DR), (is_citra ? "D-Pad Down" : FONT_DD));;
+
+        m_drop_equip_entry->Note() = std::format("\n\nDrop Equipment: {}", (is_citra ? "X" : FONT_X));
+
+        m_clear_all_items_entry->Note() = std::format("\n\nVanish Items: {}", (is_citra ? "Y" : FONT_Y));
+
+        m_debug_item_killer_entry->Note() = std::format("\nEquippable Item: {}\nThrowable Item: {}\nTrailing Item: {}\nItem Rain: {}",
+            (is_citra ? "ZR" : FONT_ZR), (is_citra ? "ZL" : FONT_ZL), (is_citra ? "D-Pad Up" : FONT_DU), (is_citra ? "R" : FONT_R));
+
         if (auto data = GetArg<menu_types::item_cycler_data_t>(m_item_cycler_entry))
         {
             data->item = Item::eItemSlot::Empty;
