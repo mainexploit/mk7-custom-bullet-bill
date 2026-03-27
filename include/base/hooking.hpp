@@ -25,7 +25,9 @@ namespace base
         hook_types::vf_hook m_Item_ItemObjKiller_hook;
 
         hook_types::detour_hook m_Item_ItemObjKillerDirector_createBeforeStructure_hook;
+        hook_types::detour_hook m_Sequence_BaseRacePage_onPagePreStep_hook;
         hook_types::detour_hook m_Item_ItemObjBase_setState_SelfMove_hook;
+        hook_types::detour_hook m_Sequence_BaseRacePage_initCaption_hook;
         hook_types::detour_hook m_Sequence_BaseRacePage_initMapIcon_hook;
         hook_types::detour_hook m_Item_KartItem_calcBeforeStructure_hook;
         hook_types::detour_hook m_Item_ItemObjBase_stateEquip_Hang_hook;

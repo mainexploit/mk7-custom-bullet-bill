@@ -81,10 +81,10 @@ CFLAGS		:=	$(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sectio
 
 CFLAGS		+=	$(INCLUDE) $(DEFINES)
 
-CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-psabi -std=gnu++23
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions -Wno-psabi -std=gnu++23 -fshort-wchar
 
 ASFLAGS		:=	$(ARCH)
-LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug
+LDFLAGS		:= -T $(TOPDIR)/3gx.ld $(ARCH) -Os -fno-lto -Wl,--gc-sections,--strip-discarded,--strip-debug,--no-wchar-size-warning
 
 LIBS		:=	-lctrpf -lctru
 LIBDIRS		:= 	$(CTRPFLIB) $(CTRULIB) $(PORTLIBS)
@@ -120,14 +120,13 @@ export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L $(dir)/lib)
 #---------------------------------------------------------------------------------
 all: $(BUILD)
 
-$(BUILD): fetch_submodules
+$(BUILD): create_headers
 	@rm -fr $(DEBUG) *.3gx
 	@mkdir -p $(DEBUG)
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --jobs=$(JOBS) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
-fetch_submodules:
-	@git submodule update --init --recursive
+create_headers:
 	@$(MAKE) --jobs=$(JOBS) --no-print-directory -C $(CURDIR)/vendor/mk7-memory -s
 
 #---------------------------------------------------------------------------------

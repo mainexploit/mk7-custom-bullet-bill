@@ -9,11 +9,11 @@ namespace base
 {
     void    hooks::Item_KartItem_calcBeforeStructure(Item::KartItem *kart_item)
     {
-        if (kart_item->m_equip_type == Item::eEquipType::Multi && kart_item->m_equip_item == Item::eItemSlot::Killer && !cfg.trailing ||
+        if (kart_item->m_equip_type == Item::eEquipType::Multi && kart_item->m_equip_item == Item::eItemSlot::Killer ||
             kart_item->m_equip_item == Item::eItemSlot::KouraG3 || kart_item->m_equip_item == Item::eItemSlot::KouraR3 || kart_item->m_equip_item == Item::eItemSlot::Seven)
         {
             Sound::SndID current_sound = Sound::SndID::SingleRotate;
-
+            
             if (kart_item->m_equip_item_amount >= 3)
                 current_sound = Sound::SndID::TripleRotate;
             else if (kart_item->m_equip_item_amount == 2)

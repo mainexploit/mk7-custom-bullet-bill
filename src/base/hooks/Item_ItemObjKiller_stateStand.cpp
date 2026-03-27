@@ -7,6 +7,6 @@ namespace base
 {
     void    hooks::Item_ItemObjKiller_stateStand(Item::ItemObjBase *item_obj)
     {
-        (item_obj->m_item_type == Item::eItemType::Killer && !cfg.squishy) ? g_pointers->m_Item_ItemObjBase_stateStand(item_obj) : g_pointers->m_Item_ItemObjBanana_stateStand(item_obj);
+        (item_obj->m_item_type == Item::eItemType::Killer && !g_menu->m_config.m_squishy) ? g_pointers->m_Item_ItemObjBase_stateStand(item_obj) : g_pointers->m_Item_ItemObjBanana_stateStand(item_obj);
     }
 }

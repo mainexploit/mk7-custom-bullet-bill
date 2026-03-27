@@ -8,14 +8,13 @@ namespace base::menu_types
 {
     struct item_cycler_data_t
     {
-        Item::eItemSlot item;
-        size_t iterator;
+        Item::eItemSlot m_item = Item::eItemSlot::Empty;
+        size_t m_iterator = 0;
     };
 
     struct debug_killer_data_t
     {
-        bool print;
-        bool item_rain;
-        size_t iterator;
+        bool m_item_rain = false;
+        size_t m_iterator = 0;
     };
 }

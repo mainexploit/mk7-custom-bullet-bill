@@ -10,12 +10,12 @@ namespace base
 
         g_pointers->m_Render_DrawMdlCreateArgs_SetPathInfoNoLoad(&create_args, _sead::safe_string("Item/itemKiller/itemKiller.bcmdl"));
         
-        create_args.enable_async = true;
-        create_args.lod_index = 0;
-        create_args.anim_track_count = 2;
-        create_args.anim_bind_mask = 4;
-        create_args.enable_culling = true;
-        create_args.draw_pass_mask = 1;
+        create_args.m_enable_async = true;
+        create_args.m_lod_index = 0;
+        create_args.m_anim_track_count = 2;
+        create_args.m_anim_bind_mask = 4;
+        create_args.m_enable_culling = true;
+        create_args.m_draw_pass_mask = 1;
         
         g_pointers->m_Object_Actor3DMdl_createModel(item_obj, create_args, nullptr);
         g_pointers->m_Item_ItemObjBase_setVisible(item_obj, false, true);

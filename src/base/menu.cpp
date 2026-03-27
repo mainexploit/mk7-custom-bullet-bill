@@ -32,12 +32,16 @@ namespace base
         create();
         finalize();
 
+        m_caption = new caption();
+
         g_menu = this;
     }
 
     menu::~menu()
     {
         g_patches->m_Sequence_BaseRacePage_initMapIcon_0x6F8_patch.disable();
+
+        delete m_caption;
 
         g_menu = nullptr;
 
@@ -68,21 +72,8 @@ namespace base
 
         m_clear_all_items_entry->Note() = std::format("\n\nVanish Items: {}", (is_citra ? "Y" : FONT_Y));
 
-        m_debug_item_killer_entry->Note() = std::format("\nEquippable Item: {}\nThrowable Item: {}\nTrailing Item: {}\nItem Rain: {}",
-            (is_citra ? "ZR" : FONT_ZR), (is_citra ? "ZL" : FONT_ZL), (is_citra ? "D-Pad Up" : FONT_DU), (is_citra ? "R" : FONT_R));
-
-        if (auto data = GetArg<menu_types::item_cycler_data_t>(m_item_cycler_entry))
-        {
-            data->item = Item::eItemSlot::Empty;
-            data->iterator = SIZE_MAX;
-        }
-
-        if (auto data = GetArg<menu_types::debug_killer_data_t>(m_debug_item_killer_entry))
-        {
-            data->print = false;
-            data->item_rain = false;
-            data->iterator = SIZE_MAX;
-        }
+        m_debug_item_killer_entry->Note() = std::format("\nEquippable Item: {}\nThrowable Item: {}\nItem Rain: {}",
+            (is_citra ? "ZR" : FONT_ZR), (is_citra ? "ZL" : FONT_ZL), (is_citra ? "D-Pad Up" : FONT_DU));
 
         g_patches->m_Sequence_BaseRacePage_initMapIcon_0x6F8_patch.enable();
     }

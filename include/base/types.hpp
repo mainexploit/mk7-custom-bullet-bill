@@ -22,11 +22,9 @@ namespace Debug
 
     struct Config
     {
-        EntryState state = EntryState::Use;
-        bool collided = false;
-        bool selfmove = false;
-        bool trailing = false;
-        bool squishy = false;
+        EntryState m_state = EntryState::Use;
+        bool m_self_move = false;
+        bool m_squishy = false;
     };
 }
 
@@ -44,15 +42,15 @@ namespace UI
     struct BgMapItem
     {
         u8 pad0[0x80];
-        Item::ItemObjBase *item_obj;
+        Item::ItemObjBase *m_item_obj;
         u8 pad1[0x594];
-        u8 tex_handle[17];
+        u8 m_tex_handle[17];
     };
 
     struct BgRaceMapItemControl
     {
-        u8 map_killer_r90_handle[17];
-        sead::PtrArray<BgMapItem> controls[std::to_underlying(Item::eItemType::MAX)];
+        u8 m_map_killer_r90_handle[17];
+        sead::PtrArray<BgMapItem> m_controls[std::to_underlying(Item::eItemType::MAX)];
     };
     static_assert(sizeof(BgRaceMapItemControl) == 0xD4);
 }
@@ -87,34 +85,34 @@ namespace Render
 {
     struct DrawMdlCreateArgs
     {
-        sead::FixedSafeString<128> res_mdl_path;
-        bool enable_preload = false;
-        bool enable_async = false;
-        u32 heap_option = 0;
-        u32 heap_alignment = 0;
-        s32 lod_index = -1;
-        sead::FixedSafeString<64> mdl_name;
-        s32 anim_track_count = -1;
-        u32 anim_bind_mask = 0;
-        u32 render_option_flags = 0;
-        u32 shared_instance_count = 0;
-        u32 instance_count = 1;
-        bool enable_draw = true;
-        bool enable_shadow = false;
-        bool enable_visibility_anim = false;
-        bool enable_culling = false;
-        s32 root_bone_index = -2;
-        s32 parent_bone_index = -2;
-        s32 attach_bone_index = -2;
-        s32 visibility_node_index = -2;
-        u32 render_layer = 0;
-        u32 render_sort_key = 0;
-        bool enable_frustum_cull = false;
-        bool enable_backface_cull = false;
-        bool enable_depth_test = true;
-        bool enable_depth_write = true;
-        u32 user_param = 0;
-        u32 draw_pass_mask = 11;
+        sead::FixedSafeString<128> m_res_mdl_path;
+        bool m_enable_preload = false;
+        bool m_enable_async = false;
+        u32 m_heap_option = 0;
+        u32 m_heap_alignment = 0;
+        s32 m_lod_index = -1;
+        sead::FixedSafeString<64> m_mdl_name;
+        s32 m_anim_track_count = -1;
+        u32 m_anim_bind_mask = 0;
+        u32 m_render_option_flags = 0;
+        u32 m_shared_instance_count = 0;
+        u32 m_instance_count = 1;
+        bool m_enable_draw = true;
+        bool m_enable_shadow = false;
+        bool m_enable_visibility_anim = false;
+        bool m_enable_culling = false;
+        s32 m_root_bone_index = -2;
+        s32 m_parent_bone_index = -2;
+        s32 m_attach_bone_index = -2;
+        s32 m_visibility_node_index = -2;
+        u32 m_render_layer = 0;
+        u32 m_render_sort_key = 0;
+        bool m_enable_frustum_cull = false;
+        bool m_enable_backface_cull = false;
+        bool m_enable_depth_test = true;
+        bool m_enable_depth_write = true;
+        u32 m_user_param = 0;
+        u32 m_draw_pass_mask = 11;
     };
     static_assert(sizeof(DrawMdlCreateArgs) == 0x124);
 }

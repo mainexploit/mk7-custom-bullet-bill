@@ -27,6 +27,7 @@ git clone <repo url> --depth=1 --recurse-submodules --shallow-submodules
 4. Run `make` in the cloned repository
 
 ## Credits
+- [MK7-Patch-Collection](https://https://github.com/Bsquo/mk7-patch-collection)
 - [CTRPF-RevolutionBase](https://github.com/Anto726/CTRPluginFramework-RevolutionBase)
 - [glaze (Fork by @Anto726)](https://github.com/Anto726/glaze)
 - [magic_enum](https://github.com/Neargye/magic_enum)

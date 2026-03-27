@@ -9,8 +9,10 @@ namespace base
 		m_Item_ItemObjKiller_hook("Item::ItemObjKiller", g_pointers->m_Item_ItemObjKiller_vtbl, hooks::ItemObjBase_count),
 		
 		m_Item_ItemObjKillerDirector_createBeforeStructure_hook("Item::ItemObjKillerDirector::createBeforeStructure", g_pointers->m_Item_ItemObjKillerDirector_createBeforeStructure, reinterpret_cast<void *>(&hooks::Item_ItemObjKillerDirector_createBeforeStructure)),
+		m_Sequence_BaseRacePage_onPagePreStep_hook("Sequence::BaseRacePage::onPagePreStep", g_pointers->m_Sequence_BaseRacePage_onPagePreStep, reinterpret_cast<void *>(&hooks::Sequence_BaseRacePage_onPagePreStep)),
 		m_Item_ItemObjBase_setState_SelfMove_hook("Item::ItemObjBase::setState_SelfMove", g_pointers->m_Item_ItemObjBase_setState_SelfMove, reinterpret_cast<void *>(&hooks::Item_ItemObjBase_setState_SelfMove)),
 		m_Sequence_BaseRacePage_initMapIcon_hook("Sequence::BaseRacePage::initMapIcon", g_pointers->m_Sequence_BaseRacePage_initMapIcon, reinterpret_cast<void *>(&hooks::Sequence_BaseRacePage_initMapIcon)),
+		m_Sequence_BaseRacePage_initCaption_hook("Sequence::BaseRacePage::initCaption", g_pointers->m_Sequence_BaseRacePage_initCaption, reinterpret_cast<void *>(&hooks::Sequence_BaseRacePage_initCaption)),
 		m_Item_KartItem_calcBeforeStructure_hook("Item::KartItem::calcBeforeStructure", g_pointers->m_Item_KartItem_calcBeforeStructure, reinterpret_cast<void *>(&hooks::Item_KartItem_calcBeforeStructure)),
 		m_Item_ItemObjBase_stateEquip_Hang_hook("Item::ItemObjBase::stateEquip_Hang", g_pointers->m_Item_ItemObjBase_stateEquip_Hang, reinterpret_cast<void *>(&hooks::Item_ItemObjBase_stateEquip_Hang)),
 		m_Item_ItemDirector_doReaction_hook("Item::ItemDirector::doReaction", g_pointers->m_Item_ItemDirector_doReaction, reinterpret_cast<void *>(&hooks::Item_ItemDirector_doReaction)),
@@ -81,8 +83,10 @@ namespace base
 		m_Item_ItemObjKiller_hook.enable();
 
 		m_Item_ItemObjKillerDirector_createBeforeStructure_hook.enable();
+		m_Sequence_BaseRacePage_onPagePreStep_hook.enable();
 		m_Item_ItemObjBase_setState_SelfMove_hook.enable();
 		m_Sequence_BaseRacePage_initMapIcon_hook.enable();
+		m_Sequence_BaseRacePage_initCaption_hook.enable();
 		m_Item_KartItem_calcBeforeStructure_hook.enable();
 		m_Item_ItemObjBase_stateEquip_Hang_hook.enable();
 		m_Item_ItemDirector_doReaction_hook.enable();
@@ -105,8 +109,10 @@ namespace base
 		m_Item_ItemObjKiller_hook.disable();
 
 		m_Item_ItemObjKillerDirector_createBeforeStructure_hook.disable();
+		m_Sequence_BaseRacePage_onPagePreStep_hook.disable();
 		m_Item_ItemObjBase_setState_SelfMove_hook.disable();
 		m_Sequence_BaseRacePage_initMapIcon_hook.disable();
+		m_Sequence_BaseRacePage_initCaption_hook.disable();
 		m_Item_KartItem_calcBeforeStructure_hook.disable();
 		m_Item_ItemObjBase_stateEquip_Hang_hook.disable();
 		m_Item_ItemDirector_doReaction_hook.disable();

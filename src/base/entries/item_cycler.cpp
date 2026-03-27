@@ -54,30 +54,30 @@ namespace base
                 {
                     if (auto kart_item = Item::GetDirector()->m_kart_items.at(utils::get_master_id()))
                     {
-                        if (data->item != Item::eItemSlot::Empty)
-                            if (kart_item->m_stock_item != data->item)
-                                g_pointers->m_Item_KartItem_setItemForce(kart_item, data->item);
+                        if (data->m_item != Item::eItemSlot::Empty)
+                            if (kart_item->m_stock_item != data->m_item)
+                                g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
 
                         if (Controller::IsKeyPressed(DPadLeft))
                         {
-                            utils::get_next_index(data->iterator, (items.size() - 1), true);
+                            utils::get_next_index(data->m_iterator, (items.size() - 1), true);
 
-                            data->item = items.at(data->iterator);
+                            data->m_item = items.at(data->m_iterator);
 
-                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->item);
+                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
                         }
                         else if (Controller::IsKeyPressed(DPadRight))
                         {
-                            utils::get_next_index(data->iterator, (items.size() - 1), false);
+                            utils::get_next_index(data->m_iterator, (items.size() - 1), false);
 
-                            data->item = items.at(data->iterator);
+                            data->m_item = items.at(data->m_iterator);
 
-                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->item);
+                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
                         }
                         else if (Controller::IsKeyPressed(DPadDown))
                         {
-                            data->item = Item::eItemSlot::Empty;
-                            data->iterator = SIZE_MAX;
+                            data->m_item = Item::eItemSlot::Empty;
+                            data->m_iterator = SIZE_MAX;
 
                             if (kart_item->m_stock_item != Item::eItemSlot::Empty)
                                 g_pointers->m_Item_ItemSlot_clear(kart_item->m_item_slot);
@@ -85,13 +85,10 @@ namespace base
                     }
                 }
             }
-            else
+            else if (data->m_iterator != SIZE_MAX)
             {
-                if (data->iterator != SIZE_MAX)
-                {
-                    data->item = Item::eItemSlot::Empty;
-                    data->iterator = SIZE_MAX;
-                }
+                data->m_item = Item::eItemSlot::Empty;
+                data->m_iterator = SIZE_MAX;
             }
         }
         else
@@ -99,8 +96,8 @@ namespace base
             g_patches->m_Item_ItemDirector_initAfterStructure_0x14_patch.disable();
             g_patches->m_Item_KartItem_setItemForce_0x28_patch.disable();
 
-            data->item = Item::eItemSlot::Empty;
-            data->iterator = SIZE_MAX;
+            data->m_item = Item::eItemSlot::Empty;
+            data->m_iterator = SIZE_MAX;
             
             if (utils::in_race())
                 if (auto kart_item = Item::GetDirector()->m_kart_items.at(utils::get_master_id()))

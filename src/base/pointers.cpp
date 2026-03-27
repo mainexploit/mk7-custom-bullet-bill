@@ -202,6 +202,48 @@ namespace base
 		{
 			m_Kart_VehicleReact_calcReact_0x20 = handle.add(0x20).as<decltype(m_Kart_VehicleReact_calcReact_0x20)>();
 		});
+
+		batch.add("UI::MenuCaption::animKeep", "70 40 2D E9 00 40 A0 E1 68 00 90 E5 01 50 A0 E3 00 10 90 E5 A0 20 91 E5 05 10 A0 E1 32 FF 2F E1 28 50 C4 E5 64 00 94 E5", [this](memory::handle handle)
+		{
+			m_UI_MenuCaption_animKeep = handle.as<decltype(m_UI_MenuCaption_animKeep)>();
+		});
+
+		batch.add("UI::BaseFastControl::setPosX", "00 00 91 E5 80 10 80 E2 0A 0A 80 ED 0C 00 90 E5 00 00 50 E3 03 0A 81 0D 02 00 00 0A 23 0A D0 ED 80 0A 30 EE 03 0A 81 ED 1E FF 2F E1", [this](memory::handle handle)
+		{
+			m_UI_BaseFastControl_setPosX = handle.as<decltype(m_UI_BaseFastControl_setPosX)>();
+		});
+
+		batch.add("UI::BaseFastControl::setPosY", "00 00 91 E5 80 10 80 E2 0B 0A 80 ED 0C 00 90 E5 00 00 50 E3 07 0A 81 0D 02 00 00 0A 27 0A D0 ED 80 0A 30 EE 07 0A 81 ED 1E FF 2F E1", [this](memory::handle handle)
+		{
+			m_UI_BaseFastControl_setPosY = handle.as<decltype(m_UI_BaseFastControl_setPosY)>();
+		});
+
+		batch.add("Sequence::BaseRacePage::onPagePreStep", "6C 02 94 E5 31 5C 84 E2 01 00 50 E3 FA 00 D5 05 00 00 50 03 03 00 00 1A 06 00 A0 E1 ? ? ? EB ? ? 9F E5 04 00 C1 E7", [this](memory::handle handle)
+		{
+			m_Sequence_BaseRacePage_onPagePreStep = handle.sub(0x30).as<decltype(m_Sequence_BaseRacePage_onPagePreStep)>();
+		});
+
+		batch.add("Util::TIndLinkList<T>::append", "00 30 91 E5 00 20 A0 E3 00 00 53 E3 04 30 91 05 00 00 53 03 01 00 00 0A 02 00 A0 E1 1E FF 2F E1", [this](memory::handle handle)
+		{
+			m_Util_TIndLinkList_UI_Control_append = handle.as<decltype(m_Util_TIndLinkList_UI_Control_append)>();
+		});
+
+		batch.add("Sequence::BaseRacePage::initCaption", "00 B0 A0 E3 25 2E 84 E2 68 B0 C4 E5 06 00 92 E8 02 00 51 E1 04 00 00 AA 58 32 94 E5 01 01 83 E7 50 12 94 E5 01 10 81 E2 50 12 84 E5 18 03 84 E5", [this](memory::handle handle)
+		{
+			m_Sequence_BaseRacePage_initCaption = handle.sub(0xF4).as<decltype(m_Sequence_BaseRacePage_initCaption)>();
+
+			auto hnd = memory::handle(reinterpret_cast<void *>(m_Sequence_BaseRacePage_initCaption));
+
+			m_UI_VisualControl_CreateArg_sub_object = hnd.add(0x58).jmp().as<decltype(m_UI_VisualControl_CreateArg_sub_object)>();
+			m_UI_ControlAnimator_AnimationDefine_sub_object = hnd.add(0x64).jmp().as<decltype(m_UI_ControlAnimator_AnimationDefine_sub_object)>();
+			m_UI_BaseMenuViewControl_ctor = hnd.add(0x94).jmp().as<decltype(m_UI_BaseMenuViewControl_ctor)>();
+			m_UI_ControlInitializer_initCreateArg = hnd.add(0xE0).jmp().as<decltype(m_UI_ControlInitializer_initCreateArg)>();
+			m_UI_ControlInitializer_endSetupControl = hnd.add(0xF0).jmp().as<decltype(m_UI_ControlInitializer_endSetupControl)>();
+
+			m_UI_VisualControl_CreateArg_AnimationDefine_vtbl = *hnd.add(0x230).as<decltype(m_UI_VisualControl_CreateArg_AnimationDefine_vtbl) *>();
+			m_UI_VisualControl_CreateArg_vtbl = *hnd.add(0x22C).as<decltype(m_UI_VisualControl_CreateArg_vtbl) *>();
+			m_UI_BaseMenuViewControl_vtbl = *hnd.add(0x234).as<decltype(m_UI_BaseMenuViewControl_vtbl) *>();
+		});
 		
 		batch.run();
 		

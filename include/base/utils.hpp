@@ -1,17 +1,7 @@
 #pragma once
 
-#include <3ds/types.h>
-
-#include <base/pointers.hpp>
-
-#include <Item/ItemDirector.hpp>
-
-#include <math/seadVector.h>
-
-#include <string>
-#include <format>
-
 #include <base/types.hpp>
+#include <string>
 
 namespace base
 {
@@ -21,8 +11,9 @@ namespace base
         bool is_character_engine_valid();
         bool is_system_engine_valid();
         bool is_paused();
+        bool is_battle();
         bool in_race();
-
+        
         void get_next_index(size_t &, size_t, bool);
         s16 get_master_id();
 

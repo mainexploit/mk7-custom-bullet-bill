@@ -18,9 +18,15 @@ namespace base
 		Net::NetworkEngine **m_network_engine;
 		sead::GlobalRandom **m_global_random;
 		
+		methods::UI_ControlAnimator_AnimationDefine_sub_object_t m_UI_ControlAnimator_AnimationDefine_sub_object;
 		methods::Render_DrawMdlCreateArgs_SetPathInfoNoLoad_t m_Render_DrawMdlCreateArgs_SetPathInfoNoLoad;
 		methods::Item_ItemObjDirectorBase_emitItemImpl_t m_Item_ItemObjDirectorBase_emitItemImpl;
+		methods::UI_VisualControl_CreateArg_sub_object_t m_UI_VisualControl_CreateArg_sub_object;
+		methods::UI_ControlInitializer_endSetupControl_t m_UI_ControlInitializer_endSetupControl;
+		methods::UI_ControlInitializer_initCreateArg_t m_UI_ControlInitializer_initCreateArg;
+		methods::Util_TIndLinkList_UI_Control_append_t m_Util_TIndLinkList_UI_Control_append;
 		methods::Object_Actor3DMdl_createModel_t m_Object_Actor3DMdl_createModel;
+		methods::Kart_VehicleMove_startKiller_t m_Kart_VehicleMove_startKiller;
 		methods::Sound_SndActorKart_holdSound_t m_Sound_SndActorKart_holdSound;
 		methods::ItemObjBase_Instance_t m_Item_ItemObjKiller_exit_VanishInner;
 		methods::ItemObjBase_Instance_t m_Item_ItemObjBanana_stateEquip_Multi;
@@ -32,15 +38,20 @@ namespace base
 		methods::Render_DrawMdlCreateArgs_t m_Render_DrawMdlCreateArgs_ctor;
 		methods::ItemObjBase_Instance_t m_Item_ItemObjBase_exit_VanishInner;
 		methods::Item_KartItem_setItemForce_t m_Item_KartItem_setItemForce;
+		methods::UI_BaseFastControl_setPosX_t m_UI_BaseFastControl_setPosX;
+		methods::UI_BaseFastControl_setPosY_t m_UI_BaseFastControl_setPosY;
+		methods::UI_BaseMenuViewControl_t m_UI_BaseMenuViewControl_ctor;
 		methods::ItemObjBase_Instance_t m_Item_ItemObjBanana_stateStand;
-		methods::ItemObjBase_Instance_t m_Item_ItemObjBase_stateStand;
 		methods::ItemObjBase_Instance_t m_Item_ItemObjBase_exit_Vanish;
 		methods::ItemObjBase_Instance_t m_Item_ItemObjBase_react_Break;
+		methods::ItemObjBase_Instance_t m_Item_ItemObjBase_stateStand;
 		methods::Item_KartItem_dropEquip_t m_Item_KartItem_dropEquip;
+		methods::UI_MenuCaption_animKeep_t m_UI_MenuCaption_animKeep;
 		methods::Item_ItemSlot_clear_t m_Item_ItemSlot_clear;
 		methods::operator_new_t m_operator_new;
-		
+
 		void *m_Item_ItemObjKillerDirector_createBeforeStructure;
+		void *m_UI_VisualControl_CreateArg_AnimationDefine_vtbl;
 		void *m_Item_ItemDirector_initAfterStructure_0x14;
 		void *m_Sequence_BaseRacePage_sub_equipItem_0xAC;
 		void *m_Item_ItemDirector_checkKartHitItem_0x590;
@@ -49,15 +60,19 @@ namespace base
 		void *m_Item_ItemObjBanana_calcOverState_0x178;
 		void *m_Item_ItemObjBanana_stateStand_0x3D8;
 		void *m_Item_ItemObjBanana_stateStand_0x78C;
+		void *m_Sequence_BaseRacePage_onPagePreStep;
 		void *m_Item_ItemObjBase_setState_SelfMove;
 		void *m_Item_KartItem_calcBeforeStructure;
+		void *m_Sequence_BaseRacePage_initCaption;
 		void *m_Sequence_BaseRacePage_initMapIcon;
 		void *m_Item_ItemObjBase_stateEquip_Hang;
 		void *m_Kart_VehicleReact_calcReact_0x20;
 		void *m_Item_KartItem_setItemForce_0x28;
 		void *m_Item_ItemObjKiller_stateInitUse;
+		void *m_UI_VisualControl_CreateArg_vtbl;
 		void *m_System_KDPadDirector_calc_0xEC;
 		void *m_Item_ItemDirector_doReaction;
+		void *m_UI_BaseMenuViewControl_vtbl;
 		void *m_Item_ItemObjKiller_stateUse;
 		void *m_Item_ItemObjBase_calcImpl;
 		void *m_Item_ItemObjKiller_vtbl;

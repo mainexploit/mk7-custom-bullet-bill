@@ -35,6 +35,8 @@ namespace base
         static void Item_ItemObjKillerDirector_createBeforeStructure(Item::ItemObjDirectorBase *, const Object::ArgumentObj);
         static void Item_ItemDirector_entryItem(Item::ItemDirector *, Item::eItemSlot , Item::KartItem *);
         static void Item_ItemObjBase_setState_SelfMove(Item::ItemObjBase *, sead::Vector2f *);
+        static void Sequence_BaseRacePage_onPagePreStep(Sequence::BaseRacePage *);
+        static void Sequence_BaseRacePage_initCaption(Sequence::BaseRacePage *);
         static void Sequence_BaseRacePage_initMapIcon(Sequence::BaseRacePage *);
         static void Item_ItemObjBase_stateEquip_Hang(Item::ItemObjBase *);
         static void Item_KartItem_calcBeforeStructure(Item::KartItem *);

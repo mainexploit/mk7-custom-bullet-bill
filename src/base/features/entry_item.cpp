@@ -16,16 +16,7 @@ namespace base
                 return true;
             }
 
-            if (cfg.collided)
-            {
-                cfg.collided = false;
-                
-                item_director->m_killer_director->entry(kart_item->m_info_proxy, false, -1);
-
-                return true;
-            }
-
-            switch (cfg.state)
+            switch (g_menu->m_config.m_state)
             {
                 case Debug::EntryState::Use:
                     item_director->m_killer_director->entry(kart_item->m_info_proxy, false, -1);

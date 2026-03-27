@@ -101,7 +101,7 @@ namespace base
             }
         }
 
-        if (!cfg.squishy)
+        if (!g_menu->m_config.m_squishy)
         {
             if (item_obj->m_item_type == Item::eItemType::Killer)
                 if (*item_obj_react == Item::eItemReact::Rescale)

@@ -3,6 +3,8 @@
 #include <ctrpf.hpp>
 
 #include <base/menu_types.hpp>
+#include <base/caption.hpp>
+#include <base/types.hpp>
 #include <get_arg.hpp>
 
 namespace base
@@ -18,9 +20,13 @@ namespace base
     private:
         friend struct entries;
         friend class features;
+        friend class hooks;
         
         void create();
         void finalize();
+
+        Debug::Config m_config;
+        caption *m_caption;
 
         CTRPluginFramework::PluginMenu *m_plugin_menu;
 

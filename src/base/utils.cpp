@@ -4,7 +4,10 @@
 
 #include <RaceSys/ModeManagerBase.hpp>
 #include <RaceSys/RaceDirector.hpp>
-#include <System/RootSystem.hpp>
+#include <RaceSys/RaceInfo/Get.hpp>
+#include <Item/ItemDirector.hpp>
+#include <System/RootSystem.hpp> 
+#include <base/pointers.hpp>
 
 namespace base
 {
@@ -33,6 +36,14 @@ namespace base
             if (auto system_engine = System::g_root_system->m_root_scene->get_system_engine())
             return reinterpret_cast<System::Engine *>(system_engine)->m_is_paused;
 
+        return false;
+    }
+
+    bool    utils::is_battle()
+    {
+        if (auto race_info = RaceSys::GetRaceInfo())
+            return (race_info->m_race_mode.m_type == RaceSys::CRaceMode::RaceType::Balloon || race_info->m_race_mode.m_type == RaceSys::CRaceMode::RaceType::Coin);
+        
         return false;
     }
 
