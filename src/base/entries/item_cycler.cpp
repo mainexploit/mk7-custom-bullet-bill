@@ -10,34 +10,34 @@
 #include <base/utils.hpp>
 #include <base/menu.hpp>
 
+static constexpr std::array<Item::eItemSlot, 18> items =
+{
+    Item::eItemSlot::Banana,
+    Item::eItemSlot::KouraG,
+    Item::eItemSlot::KouraR,
+    Item::eItemSlot::Kinoko,
+    Item::eItemSlot::Bomhei,
+    Item::eItemSlot::Gesso,
+    Item::eItemSlot::KouraB,
+    Item::eItemSlot::Kinoko3,
+    Item::eItemSlot::Star,
+    Item::eItemSlot::Killer,
+    Item::eItemSlot::Thunder,
+    Item::eItemSlot::KinokoP,
+    Item::eItemSlot::Flower,
+    Item::eItemSlot::Tail,
+    Item::eItemSlot::Seven,
+    Item::eItemSlot::Banana3,
+    Item::eItemSlot::KouraG3,
+    Item::eItemSlot::KouraR3
+};
+
 namespace base
 {
     using namespace CTRPluginFramework;
     
     void    entries::item_cycler(MenuEntry *entry)
     {
-        static std::vector<Item::eItemSlot> items =
-        {
-            Item::eItemSlot::Banana,
-            Item::eItemSlot::KouraG,
-            Item::eItemSlot::KouraR,
-            Item::eItemSlot::Kinoko,
-            Item::eItemSlot::Bomhei,
-            Item::eItemSlot::Gesso,
-            Item::eItemSlot::KouraB,
-            Item::eItemSlot::Kinoko3,
-            Item::eItemSlot::Star,
-            Item::eItemSlot::Killer,
-            Item::eItemSlot::Thunder,
-            Item::eItemSlot::KinokoP,
-            Item::eItemSlot::Flower,
-            Item::eItemSlot::Tail,
-            Item::eItemSlot::Seven,
-            Item::eItemSlot::Banana3,
-            Item::eItemSlot::KouraG3,
-            Item::eItemSlot::KouraR3
-        };
-
         const auto data = GetArg<menu_types::item_cycler_data_t>(g_menu->m_item_cycler_entry);
 
         if (entry->WasJustActivated())
@@ -77,7 +77,7 @@ namespace base
                         else if (Controller::IsKeyPressed(DPadDown))
                         {
                             data->m_item = Item::eItemSlot::Empty;
-                            data->m_iterator = SIZE_MAX;
+                            data->m_iterator = 0;
 
                             if (kart_item->m_stock_item != Item::eItemSlot::Empty)
                                 g_pointers->m_Item_ItemSlot_clear(kart_item->m_item_slot);
@@ -85,10 +85,10 @@ namespace base
                     }
                 }
             }
-            else if (data->m_iterator != SIZE_MAX)
+            else if (data->m_item != Item::eItemSlot::Empty)
             {
                 data->m_item = Item::eItemSlot::Empty;
-                data->m_iterator = SIZE_MAX;
+                data->m_iterator = 0;
             }
         }
         else
@@ -97,7 +97,7 @@ namespace base
             g_patches->m_Item_KartItem_setItemForce_0x28_patch.disable();
 
             data->m_item = Item::eItemSlot::Empty;
-            data->m_iterator = SIZE_MAX;
+            data->m_iterator = 0;
             
             if (utils::in_race())
                 if (auto kart_item = Item::GetDirector()->m_kart_items.at(utils::get_master_id()))
