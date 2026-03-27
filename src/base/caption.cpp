@@ -9,7 +9,7 @@ UI::ControlSight::ElementHandle::ElementHandle() { m_element = nullptr; }
 
 namespace base
 {
-    void    caption::create(Sequence::BasePage *base_page)
+    void    caption::init(Sequence::BasePage *base_page)
     {
         auto initializer = base_page->m_control_initializer;
         auto director = initializer->m_control_director;
@@ -202,10 +202,8 @@ namespace base
     {
         if (!dest_buf || dest_chars == 0)
             return UI::MessageString(nullptr);
-        
-        auto __c89vswprintf = reinterpret_cast<int (*)(wchar_t *, s16, const wchar_t *, va_list)>(0x116100);
 
-        s32 written = __c89vswprintf(dest_buf, dest_chars, fmt, args);
+        s32 written = g_pointers->m_c89vswprintf(dest_buf, dest_chars, fmt, args);
 
         if (written < 0)
             dest_buf[0] = L'\0';

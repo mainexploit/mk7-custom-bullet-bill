@@ -10,7 +10,7 @@ namespace base
         caption() {};
         ~caption() = default;
 
-        void create(Sequence::BasePage *);
+        void init(Sequence::BasePage *);
         void init(UI::MenuCaption *);
 
         void hide_background();

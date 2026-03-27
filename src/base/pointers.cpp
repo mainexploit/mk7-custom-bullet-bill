@@ -245,6 +245,11 @@ namespace base
 			m_UI_BaseMenuViewControl_vtbl = *hnd.add(0x234).as<decltype(m_UI_BaseMenuViewControl_vtbl) *>();
 		});
 		
+		batch.add("__c89vswprintf", "78 40 2D E9 02 C0 A0 E1 01 40 B0 E1 ? ? 2D E5 03 20 A0 E1 ? ? 9F E5 ? ? 8D E5 84 00 80 10 02 00 40 12 03 30 8F E0", [this](memory::handle handle)
+		{
+			m_c89vswprintf = handle.as<decltype(m_c89vswprintf)>();
+		});
+		
 		batch.run();
 		
 		g_pointers = this;

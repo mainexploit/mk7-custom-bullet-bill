@@ -9,7 +9,7 @@ namespace base
         if (utils::is_battle())
             return;
 
-        g_menu->m_caption->create(base_race_page);
+        g_menu->m_caption->init(base_race_page);
 
         g_menu->m_caption->set_color(nw::ut::Color8(255, 250, 200, 255), nw::lyt::TEXTCOLOR_TOP);
         g_menu->m_caption->set_color(nw::ut::Color8(255, 250, 0, 255), nw::lyt::TEXTCOLOR_BOTTOM);

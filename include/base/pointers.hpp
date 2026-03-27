@@ -49,6 +49,7 @@ namespace base
 		methods::UI_MenuCaption_animKeep_t m_UI_MenuCaption_animKeep;
 		methods::Item_ItemSlot_clear_t m_Item_ItemSlot_clear;
 		methods::operator_new_t m_operator_new;
+		methods::c89vswprintf_t m_c89vswprintf;
 
 		void *m_Item_ItemObjKillerDirector_createBeforeStructure;
 		void *m_UI_VisualControl_CreateArg_AnimationDefine_vtbl;
