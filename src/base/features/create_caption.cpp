@@ -6,9 +6,6 @@ namespace base
 {
     void    features::create_caption(Sequence::BaseRacePage *base_race_page)
     {
-        if (utils::is_battle())
-            return;
-
         g_menu->m_caption->init(base_race_page);
 
         g_menu->m_caption->set_color(nw::ut::Color8(255, 250, 200, 255), nw::lyt::TEXTCOLOR_TOP);

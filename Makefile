@@ -22,7 +22,7 @@ MAX			:=	5
 JOBS		:=	$(shell nproc)
 JOBS		:=	$(if $(shell [ $(JOBS) -gt $(MAX) ] && echo 1),$(MAX),$(JOBS))
 
-CTRPFLIB	:=	$(TOPDIR)/libctrpf
+CTRPFLIB	:=	$(DEVKITPRO)/libctrpf
 PLGINFO 	:= 	ctrpf.plgInfo
 
 BUILD		:= 	build
@@ -36,6 +36,7 @@ INCLUDES	:= 	include \
 				vendor/mk7-memory/vendor/nnheaders/include \
 				vendor/mk7-memory/vendor/nw4c/include \
 				vendor/mk7-memory/vendor/sead/include
+
 SOURCES 	:= 	src \
 				src/base \
 				src/base/hook_types \
@@ -50,6 +51,7 @@ SOURCES 	:= 	src \
 				vendor/mk7-memory/vendor/sead/modules/src/math \
 				vendor/mk7-memory/vendor/sead/modules/src/prim \
 				vendor/mk7-memory/vendor/sead/modules/src/random
+				
 FILTERS 	:=	seadBitFlag.cpp \
 				seadBoundBox.cpp \
 				seadBitCamera.cpp \

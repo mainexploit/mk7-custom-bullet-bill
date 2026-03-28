@@ -22,13 +22,14 @@ namespace base::methods
 	using UI_VisualControl_CreateArg_sub_object_t = UI::VisualControl::CreateArg * (*)(void *);
 	using Item_KartItem_setItemForce_t = void (*)(Item::KartItem *, Item::eItemSlot);
 	using Item_ItemObjBase_setVisible_t = void (*)(Item::ItemObjBase *, bool, bool);
+	using Item_ItemDirector_clearItem_t = void (*)(Item::ItemDirector *, s8);
 	using c89vswprintf_t = int (*)(wchar_t *, s16, const wchar_t *, va_list);
 	using Render_DrawMdlCreateArgs_t = Render::DrawMdlCreateArgs (*)(void);
 	using UI_BaseMenuViewControl_t = UI::BaseMenuViewControl * (*)(void *);
-	using Kart_VehicleMove_startKiller_t = void (*)(Kart::VehicleMove *);
 	using UI_MenuCaption_animKeep_t = void (*)(UI::MenuCaption *);
 	using ItemObjBase_Instance_t = void (*)(Item::ItemObjBase *);
 	using Item_KartItem_dropEquip_t = void (*)(Item::KartItem *);
 	using Item_ItemSlot_clear_t = void (*)(Item::ItemSlot *);
 	using operator_new_t = void * (*)(size_t count);
+	using Sequence_Sub_LostItem_t = void (*)(s8);
 }

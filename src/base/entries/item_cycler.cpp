@@ -38,12 +38,18 @@ namespace base
     
     void    entries::item_cycler(MenuEntry *entry)
     {
-        const auto data = GetArg<menu_types::item_cycler_data_t>(g_menu->m_item_cycler_entry);
+        auto const data = GetArg<menu_types::item_cycler_data_t>(g_menu->m_item_cycler_entry);
 
         if (entry->WasJustActivated())
         {
             g_patches->m_Item_ItemDirector_initAfterStructure_0x14_patch.enable();
             g_patches->m_Item_KartItem_setItemForce_0x28_patch.enable();
+
+            data->m_item = Item::eItemSlot::Empty;
+            data->m_iterator = 0;
+
+            if (utils::in_race())
+                g_pointers->m_Item_itemDirector_clearItem(Item::GetDirector(), utils::get_master_id());
         }
         
         if (entry->IsActivated())
@@ -52,35 +58,38 @@ namespace base
             {
                 if (!utils::is_paused())
                 {
-                    if (auto kart_item = Item::GetDirector()->m_kart_items.at(utils::get_master_id()))
+                    auto kart_item = Item::GetDirector()->m_kart_items.at(utils::get_master_id());
+
+                    if (data->m_item != Item::eItemSlot::Empty)
+                        if (kart_item->m_stock_item != data->m_item)
+                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
+
+                    if (Controller::IsKeyPressed(DPadLeft))
                     {
-                        if (data->m_item != Item::eItemSlot::Empty)
-                            if (kart_item->m_stock_item != data->m_item)
-                                g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
+                        utils::get_next_index(data->m_iterator, (items.size() - 1), true);
 
-                        if (Controller::IsKeyPressed(DPadLeft))
+                        data->m_item = items.at(data->m_iterator);
+
+                        g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
+                    }
+                    else if (Controller::IsKeyPressed(DPadRight))
+                    {
+                        utils::get_next_index(data->m_iterator, (items.size() - 1), false);
+
+                        data->m_item = items.at(data->m_iterator);
+
+                        g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
+                    }
+                    else if (Controller::IsKeyPressed(DPadDown))
+                    {
+                        data->m_item = Item::eItemSlot::Empty;
+                        data->m_iterator = 0;
+
+                        if (kart_item->m_stock_item != Item::eItemSlot::Empty)
                         {
-                            utils::get_next_index(data->m_iterator, (items.size() - 1), true);
+                            g_pointers->m_Item_ItemSlot_clear(kart_item->m_item_slot);
 
-                            data->m_item = items.at(data->m_iterator);
-
-                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
-                        }
-                        else if (Controller::IsKeyPressed(DPadRight))
-                        {
-                            utils::get_next_index(data->m_iterator, (items.size() - 1), false);
-
-                            data->m_item = items.at(data->m_iterator);
-
-                            g_pointers->m_Item_KartItem_setItemForce(kart_item, data->m_item);
-                        }
-                        else if (Controller::IsKeyPressed(DPadDown))
-                        {
-                            data->m_item = Item::eItemSlot::Empty;
-                            data->m_iterator = 0;
-
-                            if (kart_item->m_stock_item != Item::eItemSlot::Empty)
-                                g_pointers->m_Item_ItemSlot_clear(kart_item->m_item_slot);
+                            g_pointers->m_Sequence_Sub_LostItem(utils::get_master_id());
                         }
                     }
                 }
@@ -100,9 +109,7 @@ namespace base
             data->m_iterator = 0;
             
             if (utils::in_race())
-                if (auto kart_item = Item::GetDirector()->m_kart_items.at(utils::get_master_id()))
-                    if (kart_item->m_stock_item != Item::eItemSlot::Empty)
-                        g_pointers->m_Item_ItemSlot_clear(kart_item->m_item_slot);
+                g_pointers->m_Item_itemDirector_clearItem(Item::GetDirector(), utils::get_master_id());
         }
     }
 }

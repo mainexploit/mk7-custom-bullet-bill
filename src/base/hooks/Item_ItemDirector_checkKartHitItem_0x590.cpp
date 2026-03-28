@@ -12,12 +12,7 @@ namespace base
             "MOV R0, R4 \n"
             "MOV R1, R7 \n"
             "BL __kart_reaction \n"
-            "CMP R0, #0 \n"
-            "POP { R0-R1, LR } \n"
-            "BXEQ LR \n"
-            "ADD SP, SP, #0x3C \n"
-            "VPOP { D8 } \n"
-            "POP { R4-R11, PC } \n"
+            "POP { R0-R1, PC } \n"
         );
     }
 

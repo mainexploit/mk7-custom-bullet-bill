@@ -7,9 +7,6 @@ namespace base
 {
     void    features::calc_caption(Sequence::BaseRacePage *base_race_page)
     {
-        if (utils::is_battle())
-            return;
-        
         const auto data = GetArg<menu_types::debug_killer_data_t>(g_menu->m_debug_item_killer_entry);
         
         g_menu->m_caption->printf

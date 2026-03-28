@@ -40,9 +40,8 @@ namespace base
         hook_types::naked_hook m_Item_ItemDirector_checkKartHitItem_0x590_hook;
         hook_types::naked_hook m_Sequence_BaseRacePage_initMapIcon_0x814_hook;
         hook_types::naked_hook m_Item_ItemObjBanana_calcOverState_0x178_hook;
-        hook_types::naked_hook m_Item_ItemObjBanana_stateStand_0x3D8_hook;
-        hook_types::naked_hook m_Item_ItemObjBanana_stateStand_0x78C_hook;
+        hook_types::naked_hook m_Item_ItemObjBanana_stateSelfMove_0x20_hook;
     };
-
+    
     inline hooking *g_hooking{};
 }

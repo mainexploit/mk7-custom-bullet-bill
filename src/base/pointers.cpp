@@ -47,11 +47,6 @@ namespace base
 			m_Item_ItemObjDirectorBase_emitItemImpl = handle.as<decltype(m_Item_ItemObjDirectorBase_emitItemImpl)>();
 		});
 
-		batch.add("Item::ItemSlot::clear", "10 C0 D0 E5 01 30 A0 E3 00 10 A0 E3 0A 0A 9F ED", [this](memory::handle handle)
-		{
-			m_Item_ItemSlot_clear = handle.as<decltype(m_Item_ItemSlot_clear)>();
-		});
-
 		batch.add("Item::KartItem::setItemForce", "70 40 2D E9 00 40 A0 E1 34 00 90 E5 01 50 A0 E1 ? ? ? EB 34 00 94 E5", [this](memory::handle handle)
 		{
 			m_Item_KartItem_setItemForce = handle.as<decltype(m_Item_KartItem_setItemForce)>();
@@ -83,6 +78,7 @@ namespace base
 			m_Item_ItemObjBase_stateEquip_Hang = memory::handle(ItemObjBase_vtbl[hooks::ItemObjBase_stateEquip_Hang_index]).as<decltype(m_Item_ItemObjBase_stateEquip_Hang)>();
 			m_Item_ItemObjBase_stateStand = memory::handle(ItemObjBase_vtbl[hooks::ItemObjBase_stateStand_index]).as<decltype(m_Item_ItemObjBase_stateStand)>();
 			m_Item_ItemObjBase_exit_Vanish = memory::handle(reinterpret_cast<void *>(m_Item_ItemObjBase_stateStand)).add(0x2A4).jmp().as<decltype(m_Item_ItemObjBase_exit_Vanish)>();
+			m_Item_ItemObjBase_exit_BreakInner = memory::handle(ItemObjBase_vtbl[hooks::ItemObjBase_exit_BreakInner_index]).as<decltype(m_Item_ItemObjBase_exit_BreakInner)>();
 		});
 		
 		batch.add("Item::ItemDirector::entryItem", "F8 40 2D E9 01 30 A0 E1 00 40 A0 E1 2C 10 92 E5 14 00 53 E3 02 60 A0 E1 00 00 91 E5 84 50 90 E5", [this](memory::handle handle)
@@ -101,13 +97,10 @@ namespace base
 		batch.add("Item::ItemObjBanana", "7F 0A 80 ED 80 0A 80 ED 81 0A 80 ED 00 10 E0 E3 08 12 80 E5", [this](memory::handle handle)
 		{
 			m_Item_ItemObjBanana_vtbl = *memory::handle(handle.add(0x24)).as<void ***>();
-			m_Item_ItemObjBanana_stateStand = memory::handle(reinterpret_cast<void **>(m_Item_ItemObjBanana_vtbl)[hooks::ItemObjBase_stateStand_index]).as<decltype(m_Item_ItemObjBanana_stateStand)>();
-			m_Item_ItemObjBanana_stateEquip_Multi = memory::handle(reinterpret_cast<void **>(m_Item_ItemObjBanana_vtbl)[hooks::ItemObjBase_stateEquip_Multi_index]).as<decltype(m_Item_ItemObjBanana_stateEquip_Multi)>();
+			
+			auto stateSelfMove_hnd = memory::handle(reinterpret_cast<void **>(m_Item_ItemObjBanana_vtbl)[hooks::ItemObjBase_stateSelfMove_index]);
 
-			auto stateStand_hnd = memory::handle(reinterpret_cast<void **>(m_Item_ItemObjBanana_stateStand));
-
-			m_Item_ItemObjBanana_stateStand_0x3D8 = stateStand_hnd.add(0x3D8).as<decltype(m_Item_ItemObjBanana_stateStand_0x3D8)>();
-			m_Item_ItemObjBanana_stateStand_0x78C = stateStand_hnd.add(0x78C).as<decltype(m_Item_ItemObjBanana_stateStand_0x78C)>();
+			m_Item_ItemObjBanana_stateSelfMove_0x20 = stateSelfMove_hnd.add(0x20).as<decltype(m_Item_ItemObjBanana_stateSelfMove_0x20)>();
 		});
 
 		batch.add("Item::ItemObjKillerDirector::createBeforeStructure", "70 40 2D E9 00 40 A0 E1 0C 00 A0 E3 ? ? ? EB 1C 00 84 E5 0C 00 84 E5", [this](memory::handle handle)
@@ -248,6 +241,17 @@ namespace base
 		batch.add("__c89vswprintf", "78 40 2D E9 02 C0 A0 E1 01 40 B0 E1 ? ? 2D E5 03 20 A0 E1 ? ? 9F E5 ? ? 8D E5 84 00 80 10 02 00 40 12 03 30 8F E0", [this](memory::handle handle)
 		{
 			m_c89vswprintf = handle.as<decltype(m_c89vswprintf)>();
+		});
+
+		batch.add("Item::ItemDirector::clearItem", "05 01 91 87 ? ? ? EB 00 00 50 E3 21 00 00 1A C0 00 94 E5 05 00 50 E1 C8 10 94 85 00 00 A0 93 05 01 91 87 00 10 A0 E3 ? ? ? EB 05 00 A0 E1 00 F0 20 E3 ? ? ? EB 10 10 97 E5", [this](memory::handle handle)
+		{
+			m_Item_itemDirector_clearItem = handle.sub(0x60).as<decltype(m_Item_itemDirector_clearItem)>();
+
+			auto hnd = memory::handle(reinterpret_cast<void *>(m_Item_itemDirector_clearItem));
+
+			m_Item_ItemSlot_clear = hnd.add(0x88).jmp().add(0xB4).jmp().as<decltype(m_Item_ItemSlot_clear)>();
+
+			m_Sequence_Sub_LostItem = hnd.add(0x94).jmp().as<decltype(m_Sequence_Sub_LostItem)>();
 		});
 		
 		batch.run();

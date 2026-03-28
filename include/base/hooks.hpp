@@ -13,10 +13,9 @@ namespace base
         static constexpr size_t ItemObjBase_count = 70;
         static constexpr size_t ItemObjBase_getColRadius_index = 22;
         static constexpr size_t ItemObjBase_getBoxColRadius_index = 23;
-        static constexpr size_t ItemObjBase_getColScale_index = 24;
         static constexpr size_t ItemObjBase_createInner_index = 30;
         static constexpr size_t ItemObjBase_exit_VanishInner_index = 34;
-        static constexpr size_t ItemObjBase_exit_BreakInner_index = 37;
+        static constexpr size_t ItemObjBase_exit_BreakInner_index = 35;
         static constexpr size_t ItemObjBase_hasCollision_InUseState_index = 42;
         static constexpr size_t ItemObjBase_getShadowScale_index = 43;
         static constexpr size_t ItemObjBase_getOffset_Multi_Y_index = 47;
@@ -26,6 +25,7 @@ namespace base
         static constexpr size_t ItemObjBase_stateEquip_Hang_index = 55;
         static constexpr size_t ItemObjBase_stateEquip_Multi_index = 57;
         static constexpr size_t ItemObjBase_stateInitSelfMove_index = 58;
+        static constexpr size_t ItemObjBase_stateSelfMove_index = 59;
         static constexpr size_t ItemObjBase_stateStand_index = 63;
         static constexpr size_t ItemObjBase_stateInitUse_index = 64;
         static constexpr size_t ItemObjBase_stateUse_index = 65;
@@ -47,8 +47,7 @@ namespace base
         static NAKED void Item_ItemDirector_checkKartHitItem_0x590();
         static NAKED void Sequence_BaseRacePage_initMapIcon_0x814();
         static NAKED void Item_ItemObjBanana_calcOverState_0x178();
-        static NAKED void Item_ItemObjBanana_stateStand_0x3D8();
-        static NAKED void Item_ItemObjBanana_stateStand_0x78C();
+        static NAKED void Item_ItemObjBanana_stateSelfMove_0x20();
 
         static void Item_ItemObjKiller_createInner(Item::ItemObjBase *, const Object::ArgumentObj);
         static bool Item_ItemObjKiller_hasCollision_InUseState(Item::ItemObjBase *);
@@ -62,7 +61,5 @@ namespace base
         static void Item_ItemObjKiller_stateEquip_Multi(Item::ItemObjBase *);
         static float Item_ItemObjKiller_getShadowScale(Item::ItemObjBase *);
         static float Item_ItemObjKiller_getColRadius(Item::ItemObjBase *);
-        static float Item_ItemObjKiller_getColScale(Item::ItemObjBase *);
-        static void Item_ItemObjKiller_stateStand(Item::ItemObjBase *);
     };
 }

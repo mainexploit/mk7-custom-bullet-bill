@@ -4,6 +4,6 @@ namespace base
 {
     float   hooks::Item_ItemObjKiller_getBoxColRadius(Item::ItemObjBase *item_obj)
     {
-        return 17.5f;
+        return 14.f;
     }
 }

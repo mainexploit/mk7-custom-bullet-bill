@@ -9,6 +9,9 @@ namespace base
     {
         if (item_obj->m_item_type == Item::eItemType::Killer && collided_item_obj->m_item_type != Item::eItemType::Killer)
         {
+            if (item_obj->m_col_mode == Item::ItemObjBase::eColMode::None)
+                return;
+
             switch (collided_item_obj->m_item_type)
             {
                 case Item::eItemType::Banana:
@@ -20,8 +23,7 @@ namespace base
                 case Item::eItemType::KouraR:
                 {
                     *collided_item_obj_react = Item::eItemReact::Destroy;
-
-                    *item_obj_react = (collided_item_obj->m_col_mode == Item::ItemObjBase::eColMode::Equip) ? Item::eItemReact::None : Item::eItemReact::Rescale;
+                    *item_obj_react = Item::eItemReact::None;
                 }
                 break;
 
@@ -42,13 +44,16 @@ namespace base
                 case Item::eItemType::Tail:
                 {
                     *collided_item_obj_react = Item::eItemReact::TailDestroy;
-                    *item_obj_react = (collided_item_obj->m_col_mode == Item::ItemObjBase::eColMode::Equip) ? Item::eItemReact::None : Item::eItemReact::Rescale;
+                    *item_obj_react = Item::eItemReact::None;
                 }
                 break;
             }
         }
         else if (item_obj->m_item_type != Item::eItemType::Killer && collided_item_obj->m_item_type == Item::eItemType::Killer)
         {
+            if (collided_item_obj->m_col_mode == Item::ItemObjBase::eColMode::None)
+                return;
+
             switch (item_obj->m_item_type)
             {
                 case Item::eItemType::Banana:
@@ -60,8 +65,7 @@ namespace base
                 case Item::eItemType::KouraR:
                 {
                     *item_obj_react = Item::eItemReact::Destroy;
-
-                    *collided_item_obj_react = (item_obj->m_col_mode == Item::ItemObjBase::eColMode::Equip) ? Item::eItemReact::None : Item::eItemReact::Rescale;
+                    *collided_item_obj_react = Item::eItemReact::None;
                 }
                 break;
 
@@ -82,34 +86,21 @@ namespace base
                 case Item::eItemType::Tail:
                 {
                     *item_obj_react = Item::eItemReact::TailDestroy;
-                    *collided_item_obj_react = (item_obj->m_col_mode == Item::ItemObjBase::eColMode::Equip) ? Item::eItemReact::None : Item::eItemReact::Rescale;
+                    *collided_item_obj_react = Item::eItemReact::None;
                 }
                 break;
             }
         }
         else if (item_obj->m_item_type == Item::eItemType::Killer && collided_item_obj->m_item_type == Item::eItemType::Killer)
         {
-            if (item_obj->m_col_mode == Item::ItemObjBase::eColMode::Equip && collided_item_obj->m_col_mode != Item::ItemObjBase::eColMode::Equip)
-            {
-                *item_obj_react = Item::eItemReact::None;
-                *collided_item_obj_react = Item::eItemReact::Rescale;
-            }
-            else if (item_obj->m_col_mode != Item::ItemObjBase::eColMode::Equip && collided_item_obj->m_col_mode == Item::ItemObjBase::eColMode::Equip)
+            if (item_obj->m_col_mode == Item::ItemObjBase::eColMode::None || collided_item_obj->m_col_mode == Item::ItemObjBase::eColMode::None)
+                return;
+            
+            if (item_obj->m_col_mode != Item::ItemObjBase::eColMode::Equip && collided_item_obj->m_col_mode != Item::ItemObjBase::eColMode::Equip)
             {
                 *collided_item_obj_react = Item::eItemReact::None;
-                *item_obj_react = Item::eItemReact::Rescale;
+                *item_obj_react = Item::eItemReact::Ricochet;
             }
-        }
-
-        if (!g_menu->m_config.m_squishy)
-        {
-            if (item_obj->m_item_type == Item::eItemType::Killer)
-                if (*item_obj_react == Item::eItemReact::Rescale)
-                    *item_obj_react = Item::eItemReact::None;
-            
-            if (collided_item_obj->m_item_type == Item::eItemType::Killer)
-                if (*collided_item_obj_react == Item::eItemReact::Rescale)
-                    *collided_item_obj_react = Item::eItemReact::None;
         }
     }
 }

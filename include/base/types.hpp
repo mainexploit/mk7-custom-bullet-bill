@@ -24,7 +24,6 @@ namespace Debug
     {
         EntryState m_state = EntryState::Use;
         bool m_self_move = false;
-        bool m_squishy = false;
     };
 }
 

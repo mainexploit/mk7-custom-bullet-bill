@@ -7,21 +7,15 @@
 
 namespace base
 {
-    bool    features::kart_reaction(Item::ItemObjBase *item_obj, Kart::Vehicle *vehicle)
+    void    features::kart_reaction(Item::ItemObjBase *item_obj, Kart::Vehicle *vehicle)
     {
         if (item_obj->m_item_type == Item::eItemType::Killer)
         {
-            auto item_director = Item::GetDirector();
+            auto killer_director = reinterpret_cast<Item::ItemObjDirectorBase *>(item_obj->m_parent);
+            
+            auto kart_item = Item::GetDirector()->m_kart_items.at(vehicle->m_player_id);
 
-            auto kart_item = item_director->m_kart_items.at(vehicle->m_player_id);
-
-            item_director->m_killer_director->entry(kart_item->m_info_proxy, false, -1);
-
-            g_pointers->m_Item_ItemObjBase_exit_Vanish(item_obj);
-
-            return true;
+            killer_director->entry(kart_item->m_info_proxy, false, -1);
         }
-
-        return false;
     }
 }

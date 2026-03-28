@@ -24,13 +24,15 @@ namespace base
 		m_Item_ItemDirector_checkKartHitItem_0x590_hook("Item::ItemDirector::checkKartHitItem+0x590", g_pointers->m_Item_ItemDirector_checkKartHitItem_0x590, reinterpret_cast<void *>(&hooks::Item_ItemDirector_checkKartHitItem_0x590), CTRPluginFramework::HOOK_DEFAULT_PARAMS),
 		m_Sequence_BaseRacePage_initMapIcon_0x814_hook("Sequence::BaseRacePage::initMapIcon+0x814", g_pointers->m_Sequence_BaseRacePage_initMapIcon_0x814, reinterpret_cast<void *>(&hooks::Sequence_BaseRacePage_initMapIcon_0x814), CTRPluginFramework::HOOK_DEFAULT_PARAMS),
 		m_Item_ItemObjBanana_calcOverState_0x178_hook("Item::ItemObjBanana::_calcOverState+0x178", g_pointers->m_Item_ItemObjBanana_calcOverState_0x178, reinterpret_cast<void *>(&hooks::Item_ItemObjBanana_calcOverState_0x178), CTRPluginFramework::HOOK_DEFAULT_PARAMS),
-		m_Item_ItemObjBanana_stateStand_0x3D8_hook("Item::ItemObjBanana::stateStand+0x3D8", g_pointers->m_Item_ItemObjBanana_stateStand_0x3D8, reinterpret_cast<void *>(&hooks::Item_ItemObjBanana_stateStand_0x3D8), CTRPluginFramework::USE_LR_TO_RETURN | CTRPluginFramework::EXECUTE_OI_AFTER_CB),
-		m_Item_ItemObjBanana_stateStand_0x78C_hook("Item::ItemObjBanana::stateStand+0x78C", g_pointers->m_Item_ItemObjBanana_stateStand_0x78C, reinterpret_cast<void *>(&hooks::Item_ItemObjBanana_stateStand_0x78C), CTRPluginFramework::USE_LR_TO_RETURN | CTRPluginFramework::EXECUTE_OI_AFTER_CB)
+		m_Item_ItemObjBanana_stateSelfMove_0x20_hook("Item::ItemObjBanana::stateSelfMove+0x20", g_pointers->m_Item_ItemObjBanana_stateSelfMove_0x20, reinterpret_cast<void *>(&hooks::Item_ItemObjBanana_stateSelfMove_0x20), CTRPluginFramework::USE_LR_TO_RETURN)
 	{
 		memcpy(g_pointers->m_Item_ItemObjKiller_vtbl, g_pointers->m_Item_ItemObjBanana_vtbl, (hooks::ItemObjBase_count * 4));
 
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_stateInitUse_index, g_pointers->m_Item_ItemObjKiller_stateInitUse);
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_stateUse_index, g_pointers->m_Item_ItemObjKiller_stateUse);
+
+		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_exit_BreakInner_index, reinterpret_cast<void *>(g_pointers->m_Item_ItemObjBase_exit_BreakInner));
+		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_stateStand_index, reinterpret_cast<void *>(g_pointers->m_Item_ItemObjBase_stateStand));
 
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_hasCollision_InUseState_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_hasCollision_InUseState));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjbase_getRotVelRatio_Multi_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getRotVelRatio_Multi));
@@ -39,14 +41,11 @@ namespace base
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_getOffset_Multi_Z_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getOffset_Multi_Z));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_stateEquip_Multi_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_stateEquip_Multi));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_exit_VanishInner_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_exit_VanishInner));
-		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_exit_BreakInner_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_exit_VanishInner));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_getRadius_Multi_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getRadius_Multi));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_getBoxColRadius_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getBoxColRadius));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_getShadowScale_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getShadowScale));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_getColRadius_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getColRadius));
-		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_getColScale_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_getColScale));
 		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_createInner_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_createInner));
-		m_Item_ItemObjKiller_hook.hook(hooks::ItemObjBase_stateStand_index, reinterpret_cast<void *>(&hooks::Item_ItemObjKiller_stateStand));
 
 		g_hooking = this;
 	}
@@ -58,6 +57,9 @@ namespace base
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_stateInitUse_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_stateUse_index);
 
+		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_exit_BreakInner_index);
+		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_stateStand_index);
+
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_hasCollision_InUseState_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjbase_getRotVelRatio_Multi_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_stateInitSelfMove_index);
@@ -65,14 +67,11 @@ namespace base
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_getOffset_Multi_Z_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_stateEquip_Multi_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_exit_VanishInner_index);
-		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_exit_BreakInner_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_getRadius_Multi_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_getBoxColRadius_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_getShadowScale_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_getColRadius_index);
-		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_getColScale_index);
 		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_createInner_index);
-		m_Item_ItemObjKiller_hook.unhook(hooks::ItemObjBase_stateStand_index);
 
 		if (m_enabled)
 			disable();
@@ -98,8 +97,7 @@ namespace base
 		m_Item_ItemDirector_checkKartHitItem_0x590_hook.enable();
 		m_Sequence_BaseRacePage_initMapIcon_0x814_hook.enable();
 		m_Item_ItemObjBanana_calcOverState_0x178_hook.enable();
-		m_Item_ItemObjBanana_stateStand_0x3D8_hook.enable();
-		m_Item_ItemObjBanana_stateStand_0x78C_hook.enable();
+		m_Item_ItemObjBanana_stateSelfMove_0x20_hook.enable();
 
 		m_enabled = true;
 	}
@@ -124,8 +122,7 @@ namespace base
 		m_Item_ItemDirector_checkKartHitItem_0x590_hook.disable();
 		m_Sequence_BaseRacePage_initMapIcon_0x814_hook.disable();
 		m_Item_ItemObjBanana_calcOverState_0x178_hook.disable();
-		m_Item_ItemObjBanana_stateStand_0x3D8_hook.disable();
-		m_Item_ItemObjBanana_stateStand_0x78C_hook.disable();
+		m_Item_ItemObjBanana_stateSelfMove_0x20_hook.disable();
 
 		m_enabled = false;
 	}
