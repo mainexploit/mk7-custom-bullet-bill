@@ -1,11 +1,10 @@
 #pragma once
 
-#include <ctrpf.hpp>
-
 #include <base/menu_types.hpp>
 #include <base/caption.hpp>
 #include <base/types.hpp>
 #include <get_arg.hpp>
+#include <ctrpf.hpp>
 
 namespace base
 {

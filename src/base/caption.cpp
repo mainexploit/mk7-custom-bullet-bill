@@ -53,35 +53,10 @@ namespace base
         if (m_instance = caption)
         {
             realloc_str_buf();
+
             hide_background();
-        }
-    }
 
-    void    caption::printf(f32 x, f32 y, const wchar_t *fmt, ...)
-    {
-        if (m_instance)
-        {
             g_pointers->m_UI_MenuCaption_animKeep(m_instance);
-
-            set_position(x, y);
-
-            va_list args;
-            va_start(args, fmt);
-            UI::MessageString message = fmt_message(m_wbuf, std::size(m_wbuf), fmt, args);
-            va_end(args);
-
-            set_message(message);
-        }
-    }
-    
-    void    caption::hide_background()
-    {
-        if (m_instance)
-        {
-            UI::ControlSight::ElementHandle pane_handle;
-
-            if (pane_handle.m_element = m_instance->m_control_sight->getElementHandle("R_center", UI::ControlSight::EElementType::ELEMENT_TYPE_PANE))
-                g_pointers->m_UI_BaseFastControl_setPosX(m_instance, pane_handle, 400.f); // push the background out of screen
         }
     }
 
@@ -95,6 +70,80 @@ namespace base
 
                 text_box->AllocStringBuffer((std::size(m_wbuf) >> 1) - 1);
             }
+        }
+    }
+
+    void    caption::printf(f32 x, f32 y, const wchar_t *fmt, ...)
+    {
+        if (m_instance)
+        {
+            set_position(x, y);
+
+            va_list args;
+            va_start(args, fmt);
+            UI::MessageString message = fmt_message(m_wbuf, std::size(m_wbuf), fmt, args);
+            va_end(args);
+
+            set_message(message);
+        }
+    }
+
+    void    caption::printf(const wchar_t *fmt, ...)
+    {
+        if (m_instance)
+        {
+            va_list args;
+            va_start(args, fmt);
+            UI::MessageString message = fmt_message(m_wbuf, std::size(m_wbuf), fmt, args);
+            va_end(args);
+
+            set_message(message);
+        }
+    }
+
+    void    caption::animate(Animation anim)
+    {
+        if (m_instance && m_last_anim != anim)
+        {
+            switch (anim)
+            {
+                case Animation::Out:
+                    g_pointers->m_UI_MenuCaption_animOut(m_instance);
+                break;
+
+                case Animation::In:
+                    g_pointers->m_UI_MenuCaption_animIn(m_instance);
+                break;
+            }
+
+            m_last_anim = anim;
+        }
+    }
+
+    void    caption::set_visible(bool visible)
+    {
+        if (m_instance)
+            if (auto text_box = get_text_box())
+                text_box->m_flag = visible;
+    }
+
+    bool    caption::is_visible()
+    {
+        if (m_instance)
+            if (auto text_box = get_text_box())
+                return static_cast<bool>(text_box->m_flag);
+        
+        return false;
+    }
+    
+    void    caption::hide_background()
+    {
+        if (m_instance)
+        {
+            UI::ControlSight::ElementHandle pane_handle;
+
+            if (pane_handle.m_element = get_background())
+                g_pointers->m_UI_BaseFastControl_setPosX(m_instance, pane_handle, 400.f); // push the background out of screen
         }
     }
 
@@ -113,65 +162,71 @@ namespace base
         set_message(message);
     }
 
-    void    caption::set_color(const nw::ut::Color8 color, s32 color_location = nw::lyt::TEXTCOLOR_MAX)
+    void    caption::set_color(const Color8 color, GradientLayer color_location = GradientLayer::All)
     {
         if (m_instance)
         {
             if (auto text_box = get_text_box())
             {
-                if (color_location == nw::lyt::TEXTCOLOR_MAX)
+                if (color_location == GradientLayer::All)
                 {
-                    for (s32 i = 0; i < nw::lyt::TEXTCOLOR_MAX; i++)
-                        text_box->mTextColors[i] = color;
+                    text_box->mTextColors[std::to_underlying(GradientLayer::Top)] = color;
+                    text_box->mTextColors[std::to_underlying(GradientLayer::Bottom)] = color;
 
                     return;
                 }
                 
-                text_box->mTextColors[color_location] = color;
+                text_box->mTextColors[std::to_underlying(color_location)] = color;
             }
         }
     }
 
-    void    caption::set_outline_color(u8 color)
+    void    caption::set_alignment(Alignment alignment)
     {
         if (m_instance)
-        {
-            if (color >= nw::lyt::TEXT_OUTLINE_MAX)
-                return;
-            
             if (auto text_box = get_text_box())
-                text_box->mOutlineColor = color;
-        }
+                text_box->mTextPosition = std::to_underlying(alignment);
     }
 
     void    caption::set_position(f32 x, f32 y)
     {
         if (m_instance)
         {
-            UI::ControlSight::ElementHandle textbox_handle;
+            UI::ControlSight::ElementHandle text_box_handle;
 
-            if (textbox_handle.m_element = m_instance->m_control_sight->getElementHandle("T_caption_00", UI::ControlSight::EElementType::ELEMENT_TYPE_TEXTBOX))
+            if (text_box_handle.m_element = get_text_box())
             {
                 x -= 400.f; // substract -400.f due to background shift
 
-                g_pointers->m_UI_BaseFastControl_setPosX(m_instance, textbox_handle, x);
-                g_pointers->m_UI_BaseFastControl_setPosY(m_instance, textbox_handle, y);
+                g_pointers->m_UI_BaseFastControl_setPosX(m_instance, text_box_handle, x);
+                g_pointers->m_UI_BaseFastControl_setPosY(m_instance, text_box_handle, y);
             }
         }
     }
 
-    void    caption::set_size(f32 x, f32 y)
+    void    caption::set_outline(Outline color = Outline::Black)
     {
         if (m_instance)
             if (auto text_box = get_text_box())
-                text_box->mFontSize = nw::lyt::Size(x, y);
+                text_box->mOutlineColor = std::to_underlying(color);
     }
 
-    void    caption::set_text_alignment(u8 position)
+    void    caption::set_screen(Screen screen)
     {
         if (m_instance)
+            m_instance->m_draw_screen_flag |= std::to_underlying(screen);
+    }
+
+    void    caption::set_size(f32 size)
+    {
+        if (m_instance)
+        {
             if (auto text_box = get_text_box())
-                text_box->mTextPosition = position;
+            {
+                text_box->mFontSize.width = size;
+                text_box->mFontSize.height = size * 1.18181812763f;
+            }
+        }  
     }
 
     void    caption::set_line_space(f32 line_space)
@@ -188,19 +243,9 @@ namespace base
                 text_box->mCharSpace = char_space;
     }
 
-    void    caption::set_screen(Screen screen)
-    {
-        if (m_instance)
-        {
-            auto flags = (screen == Screen::BOTTOM) ? UI::Control::ControlDrawScreenFlag::DRAW_ON_BOTTOM_SCREEN : UI::Control::ControlDrawScreenFlag::DRAW_ON_TOP_SCREEN;
-
-            m_instance->m_draw_screen_flag |= flags;
-        }
-    }
-
     UI::MessageString   caption::fmt_message(wchar_t *dest_buf, u16 dest_chars, const wchar_t *fmt, va_list args)
     {
-        if (!dest_buf || dest_chars == 0)
+        if (!dest_buf || !dest_chars)
             return UI::MessageString(nullptr);
 
         s32 written = g_pointers->m_c89vswprintf(dest_buf, dest_chars, fmt, args);
@@ -219,6 +264,15 @@ namespace base
         if (m_instance)
             if (auto m_element = m_instance->m_control_sight->getElementHandle("T_caption_00", UI::ControlSight::EElementType::ELEMENT_TYPE_TEXTBOX))
                 return static_cast<nw::lyt::TextBox *>(m_element);
+        
+        return nullptr;
+    }
+
+    nw::lyt::Pane   *caption::get_background()
+    {
+        if (m_instance)
+            if (auto m_element = m_instance->m_control_sight->getElementHandle("R_center", UI::ControlSight::EElementType::ELEMENT_TYPE_PANE))
+                return static_cast<nw::lyt::Pane *>(m_element);
         
         return nullptr;
     }

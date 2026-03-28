@@ -15,7 +15,6 @@ namespace base
 		explicit pointers();
 		~pointers();
 
-		Net::NetworkEngine **m_network_engine;
 		sead::GlobalRandom **m_global_random;
 		
 		methods::UI_ControlAnimator_AnimationDefine_sub_object_t m_UI_ControlAnimator_AnimationDefine_sub_object;
@@ -45,6 +44,8 @@ namespace base
 		methods::ItemObjBase_Instance_t m_Item_ItemObjBase_stateStand;
 		methods::Item_KartItem_dropEquip_t m_Item_KartItem_dropEquip;
 		methods::UI_MenuCaption_animKeep_t m_UI_MenuCaption_animKeep;
+		methods::UI_MenuCaption_animOut_t m_UI_MenuCaption_animOut;
+		methods::UI_MenuCaption_animIn_t m_UI_MenuCaption_animIn;
 		methods::Sequence_Sub_LostItem_t m_Sequence_Sub_LostItem;
 		methods::Item_ItemSlot_clear_t m_Item_ItemSlot_clear;
 		methods::operator_new_t m_operator_new;

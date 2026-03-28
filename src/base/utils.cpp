@@ -1,13 +1,12 @@
 #include <base/utils.hpp>
 
-#include <ctrpf.hpp>
-
 #include <RaceSys/ModeManagerBase.hpp>
 #include <RaceSys/RaceDirector.hpp>
 #include <RaceSys/RaceInfo/Get.hpp>
 #include <Item/ItemDirector.hpp>
 #include <System/RootSystem.hpp> 
 #include <base/pointers.hpp>
+#include <ctrpf.hpp>
 
 namespace base
 {
@@ -25,15 +24,9 @@ namespace base
         return (System::g_root_system->m_scene_manager->m_root_scene->get_character_engine());
     }
 
-    bool    utils::is_system_engine_valid()
-    {
-        return (System::g_root_system->m_scene_manager->m_root_scene->get_system_engine());
-    }
-
     bool    utils::is_paused()
     {
-        if (is_system_engine_valid())
-            if (auto system_engine = System::g_root_system->m_root_scene->get_system_engine())
+        if (auto system_engine = System::g_root_system->m_root_scene->get_system_engine())
             return reinterpret_cast<System::Engine *>(system_engine)->m_is_paused;
 
         return false;

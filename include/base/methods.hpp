@@ -29,6 +29,8 @@ namespace base::methods
 	using UI_MenuCaption_animKeep_t = void (*)(UI::MenuCaption *);
 	using ItemObjBase_Instance_t = void (*)(Item::ItemObjBase *);
 	using Item_KartItem_dropEquip_t = void (*)(Item::KartItem *);
+	using UI_MenuCaption_animOut_t = void (*)(UI::MenuCaption *);
+	using UI_MenuCaption_animIn_t = void (*)(UI::MenuCaption *);
 	using Item_ItemSlot_clear_t = void (*)(Item::ItemSlot *);
 	using operator_new_t = void * (*)(size_t count);
 	using Sequence_Sub_LostItem_t = void (*)(s8);

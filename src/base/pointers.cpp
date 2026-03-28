@@ -13,11 +13,6 @@ namespace base
 	{
 		auto batch = memory::batch();
 
-		batch.add("Net::NetworkEngine", "B4 29 00 00 D4 27 00 00 78 78 00 00 F8 05 00 00", [this](memory::handle handle)
-		{
-			m_network_engine = *handle.add(0x1C).as<decltype(m_network_engine) *>();
-		});
-
 		batch.add("sead::Random", "00 00 54 E3 04 00 85 E5 04 00 A0 11 00 40 A0 03", [this](memory::handle handle)
 		{
 			m_global_random = *handle.add(0x20).as<decltype(m_global_random) *>();
@@ -252,6 +247,16 @@ namespace base
 			m_Item_ItemSlot_clear = hnd.add(0x88).jmp().add(0xB4).jmp().as<decltype(m_Item_ItemSlot_clear)>();
 
 			m_Sequence_Sub_LostItem = hnd.add(0x94).jmp().as<decltype(m_Sequence_Sub_LostItem)>();
+		});
+
+		batch.add("UI::MenuCaption::animOut", "10 40 2D E9 64 40 90 E5 08 10 94 E5 00 20 91 E5 14 10 92 E5 03 00 51 E3 00 00 51 13", [this](memory::handle handle)
+		{
+			m_UI_MenuCaption_animOut = handle.as<decltype(m_UI_MenuCaption_animOut)>();
+		});
+
+		batch.add("UI::MenuCaption::animIn", "70 40 2D E9 00 40 A0 E1 64 00 90 E5 00 10 A0 E3 08 00 90 E5 00 00 90 E5 14 00 90 E5 01 00 50 E3 02 00 50 13 A8 10 84 05", [this](memory::handle handle)
+		{
+			m_UI_MenuCaption_animIn = handle.as<decltype(m_UI_MenuCaption_animIn)>();
 		});
 		
 		batch.run();

@@ -9,7 +9,7 @@ namespace base
     {
         bool check_process(std::string_view);
         bool is_character_engine_valid();
-        bool is_system_engine_valid();
+
         bool is_paused();
         bool is_battle();
         bool in_race();

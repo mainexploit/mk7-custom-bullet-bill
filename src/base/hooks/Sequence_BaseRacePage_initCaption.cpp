@@ -1,7 +1,6 @@
 #include <base/hooking.hpp>
 
 #include <base/features.hpp>
-#include <base/pointers.hpp>
 
 namespace base
 {
