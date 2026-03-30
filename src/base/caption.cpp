@@ -143,7 +143,10 @@ namespace base
             UI::ControlSight::ElementHandle pane_handle;
 
             if (pane_handle.m_element = get_background())
+            {
                 g_pointers->m_UI_BaseFastControl_setPosX(m_instance, pane_handle, 400.f); // push the background out of screen
+                g_pointers->m_UI_BaseFastControl_setPosY(m_instance, pane_handle, -105.f); // re-align misaligned captions
+            }
         }
     }
 
@@ -241,6 +244,15 @@ namespace base
         if (m_instance)
             if (auto text_box = get_text_box())
                 text_box->mCharSpace = char_space;
+    }
+
+    float   caption::get_font_width()
+    {
+        if (m_instance)
+            if (auto text_box = get_text_box())
+                return text_box->mFontSize.width;
+        
+        return 0.f;
     }
 
     UI::MessageString   caption::fmt_message(wchar_t *dest_buf, u16 dest_chars, const wchar_t *fmt, va_list args)

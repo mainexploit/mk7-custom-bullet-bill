@@ -79,6 +79,8 @@ namespace base
 
         void set_line_space(f32);
         void set_char_space(f32);
+        
+        float get_font_width();
 
     private:
         UI::MenuCaption *m_instance;

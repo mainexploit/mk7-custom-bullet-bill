@@ -9,9 +9,8 @@ namespace base
     {
         const auto data = GetArg<menu_types::debug_killer_data_t>(g_menu->m_debug_item_killer_entry);
         
-        g_menu->m_caption->printf
+        g_menu->m_caption.printf
         (
-            8.f, 0.f,
             L"State: %s\n"
             L"Self Move: %s\n"
             L"Item Rain: %s",

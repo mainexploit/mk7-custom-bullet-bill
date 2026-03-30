@@ -1,11 +1,9 @@
 #include <base/pointers.hpp>
 
-#include <base/hooks.hpp>
-
-#include <base/memory/all.hpp>
-
-#include <callback.hpp>
 #include <System/RootSystem.hpp>
+#include <base/memory/all.hpp>
+#include <base/hooks.hpp>
+#include <callback.hpp>
 
 namespace base
 {

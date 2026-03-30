@@ -26,6 +26,9 @@ namespace base
         {
             g_patches->m_Kart_VehicleReact_calcReact_0x20_patch.enable();
             g_patches->m_System_KDPadDirector_calc_0xEC_patch.enable();
+
+            data->m_item_rain = false;
+            data->m_iterator = 0;
         }
 
         if (entry->IsActivated())
@@ -97,11 +100,11 @@ namespace base
         }
         else
         {
-            data->m_item_rain = false;
-            data->m_iterator = 0;
-
             g_patches->m_Kart_VehicleReact_calcReact_0x20_patch.disable();
             g_patches->m_System_KDPadDirector_calc_0xEC_patch.disable();
+            
+            data->m_item_rain = false;
+            data->m_iterator = 0;
         }
     }
 }

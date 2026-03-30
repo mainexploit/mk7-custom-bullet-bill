@@ -1,8 +1,8 @@
 #include <base/menu.hpp>
 
+#include <base/settings.hpp>
 #include <base/entries.hpp>
 #include <base/patches.hpp>
-#include <base/settings.hpp>
 
 #include <Unicode.h>
 #include <format>
@@ -32,16 +32,12 @@ namespace base
         create();
         finalize();
 
-        m_caption = new caption();
-
         g_menu = this;
     }
 
     menu::~menu()
     {
         g_patches->m_Sequence_BaseRacePage_initMapIcon_0x6F8_patch.disable();
-
-        delete m_caption;
 
         g_menu = nullptr;
 

@@ -25,7 +25,7 @@ namespace base
         void finalize();
 
         Debug::Config m_config;
-        caption *m_caption;
+        caption m_caption;
 
         CTRPluginFramework::PluginMenu *m_plugin_menu;
 
