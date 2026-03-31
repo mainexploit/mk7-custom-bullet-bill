@@ -56,6 +56,8 @@ namespace base
 
             hide_background();
 
+            set_position(0.f, 0.f);
+
             g_pointers->m_UI_MenuCaption_animKeep(m_instance);
         }
     }
