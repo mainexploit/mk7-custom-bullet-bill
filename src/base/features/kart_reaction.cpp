@@ -9,7 +9,7 @@ namespace base
 {
     void    features::kart_reaction(Item::ItemObjBase *item_obj, Kart::Vehicle *vehicle)
     {
-        if (item_obj->m_item_type == Item::eItemType::Killer)
+        if (item_obj->m_item_type == Item::eItemType::Killer && item_obj->m_col_mode != Item::ItemObjBase::eColMode::None)
         {
             auto killer_director = reinterpret_cast<Item::ItemObjDirectorBase *>(item_obj->m_parent);
             
