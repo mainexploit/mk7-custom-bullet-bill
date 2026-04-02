@@ -69,7 +69,7 @@ FILTERS 	:=	seadBitFlag.cpp \
 				seadStringBuilder.cpp \
 				seadStringUtil.cpp \
 				seadTreeNode.cpp \
-				seadSafeString.cpp \
+				seadSafeString.cpp
 
 #---------------------------------------------------------------------------------
 # options for code generation
