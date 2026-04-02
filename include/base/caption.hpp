@@ -3,6 +3,9 @@
 #include <Sequence/BaseMenuPage.hpp>
 #include <Sequence/BaseRacePage.hpp>
 
+#include <format>
+#include <string>
+
 namespace base
 {
     enum class Animation
@@ -57,6 +60,23 @@ namespace base
 
         void realloc_str_buf();
 
+        template <typename ...args_t>
+        void    printf(f32 x, f32 y, std::format_string<args_t ...> fmt, args_t &&...args)
+        {
+            auto str = std::format(fmt, std::forward<args_t>(args)...);
+            printf(x, y, str);
+        }
+
+        template <typename ...args_t>
+        void    printf(std::format_string<args_t ...> fmt, args_t &&...args)
+        {
+            auto str = std::format(fmt, std::forward<args_t>(args)...);
+            printf(str);
+        }
+
+        void printf(f32, f32, const std::string &);
+        void printf(const std::string &);
+
         void printf(f32, f32, const wchar_t *, ...);
         void printf(const wchar_t *, ...);
 
@@ -65,12 +85,10 @@ namespace base
         void set_visible(bool);
         bool is_visible();
 
-        void hide_background();
-
         void set_message(const UI::MessageString &);
         void set_message(s32);
 
-        void set_color(const Color8, GradientLayer);
+        void set_color(Color8, GradientLayer);
         void set_alignment(Alignment);
         void set_position(f32, f32);
         void set_outline(Outline);
@@ -85,6 +103,8 @@ namespace base
     private:
         UI::MenuCaption *m_instance;
         Animation m_last_anim;
+
+        void hide_background();
 
         nw::lyt::TextBox *get_text_box();
         nw::lyt::Pane *get_background();

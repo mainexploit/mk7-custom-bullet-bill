@@ -5,6 +5,9 @@
 
 #include <wchar.h>
 
+#include <codecvt>
+#include <locale>
+
 UI::ControlSight::ElementHandle::ElementHandle() { m_element = nullptr; }
 
 namespace base
@@ -72,6 +75,36 @@ namespace base
 
                 text_box->AllocStringBuffer((std::size(m_wbuf) >> 1) - 1);
             }
+        }
+    }
+
+    void    caption::printf(f32 x, f32 y, const std::string &str)
+    {
+        if (m_instance)
+        {
+            set_position(x, y);
+            
+            std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
+
+            auto wstr = converter.from_bytes(str);
+
+            auto message = UI::MessageString(wstr.data());
+
+            set_message(message);
+        }
+    }
+
+    void    caption::printf(const std::string &str)
+    {
+        if (m_instance)
+        {
+            std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> converter;
+
+            auto wstr = converter.from_bytes(str);
+
+            auto message = UI::MessageString(wstr.data());
+
+            set_message(message);
         }
     }
 
@@ -219,7 +252,7 @@ namespace base
     void    caption::set_screen(Screen screen)
     {
         if (m_instance)
-            m_instance->m_draw_screen_flag |= std::to_underlying(screen);
+            m_instance->m_draw_screen_flag = std::to_underlying(screen);
     }
 
     void    caption::set_size(f32 size)

@@ -79,7 +79,7 @@ DEFINES 	:=	-D__3DS__ -DNNSDK -DMAGIC_ENUM_RANGE_MIN=0 -DMAGIC_ENUM_RANGE_MAX=25
 
 ARCH		:=	-march=armv6k -mtune=mpcore -mfloat-abi=hard -mtp=soft
 
-CFLAGS		:=	$(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-invalid-offsetof
+CFLAGS		:=	$(ARCH) -Os -mword-relocations -fomit-frame-pointer -ffunction-sections -fno-strict-aliasing -Wno-invalid-offsetof -Wno-deprecated-declarations
 
 CFLAGS		+=	$(INCLUDE) $(DEFINES)
 
