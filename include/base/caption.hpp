@@ -43,10 +43,10 @@ namespace base
         None = nw::lyt::TEXT_OUTLINE_NONE
     };
 
-    enum class Screen : s32
+    enum class Screen : u32
     {
-        Top = UI::Control::ControlDrawScreenFlag::DRAW_ON_TOP_SCREEN,
-        Bottom = UI::Control::ControlDrawScreenFlag::DRAW_ON_BOTTOM_SCREEN
+        Top = std::to_underlying(UI::Control::EDrawScreenFlag::DRAW_ON_TOP_SCREEN),
+        Bottom = std::to_underlying(UI::Control::EDrawScreenFlag::DRAW_ON_BOTTOM_SCREEN)
     };
 
     class caption

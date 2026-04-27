@@ -184,7 +184,7 @@ namespace base
 			m_System_KDPadDirector_calc_0xEC = handle.as<decltype(m_System_KDPadDirector_calc_0xEC)>();
 		});
 
-		batch.add("Kart::VehicleReact::calcReact", "F0 4F 2D E9 00 40 A0 E1 03 9B 80 E2 ? ? 9F ED 06 8B 2D ED 4C D0 4D E2 B0 0A 89 ED B5 0A 89 ED A3 00 D0 E5", [this](memory::handle handle)
+		batch.add("Kart::VehicleReact::calcReact", "F0 4F 2D E9 00 40 A0 E1 03 9B 80 E2 ? ? 9F ED", [this](memory::handle handle)
 		{
 			m_Kart_VehicleReact_calcReact_0x20 = handle.add(0x20).as<decltype(m_Kart_VehicleReact_calcReact_0x20)>();
 		});
@@ -255,6 +255,12 @@ namespace base
 		batch.add("UI::MenuCaption::animIn", "70 40 2D E9 00 40 A0 E1 64 00 90 E5 00 10 A0 E3 08 00 90 E5 00 00 90 E5 14 00 90 E5 01 00 50 E3 02 00 50 13 A8 10 84 05", [this](memory::handle handle)
 		{
 			m_UI_MenuCaption_animIn = handle.as<decltype(m_UI_MenuCaption_animIn)>();
+		});
+
+		batch.add("Item::ItemObjKouraG::calc_GndColCheck", "F0 4F 2D E9 00 40 A0 E1 01 60 A0 E1 04 8B 2D ED 40 8A B0 EE 24 D0 4D E2 70 50 90 E5", [this](memory::handle handle)
+		{
+			m_Item_ItemObjKoura_calc_GndColCheck_0xE0 = handle.add(0xE0).as<decltype(m_Item_ItemObjKoura_calc_GndColCheck_0xE0)>();
+			m_Item_ItemObjKoura_calc_GndColCheck_0x4E0 = handle.add(0x4E0).as<decltype(m_Item_ItemObjKoura_calc_GndColCheck_0x4E0)>();
 		});
 		
 		batch.run();

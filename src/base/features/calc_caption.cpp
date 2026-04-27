@@ -11,10 +11,10 @@ namespace base
         
         g_menu->m_caption.printf
         (
-            L"State: %s\n"
-            L"Self Move: %s\n"
-            L"Item Rain: %s",
-            std::string(magic_enum::enum_name(g_menu->m_config.m_state)).c_str(),
+            "State: {}\n"
+            "Self Move: {}\n"
+            "Item Rain: {}",
+            std::string(magic_enum::enum_name(g_menu->m_config.m_state)),
             (g_menu->m_config.m_self_move ? "ON" : "OFF"),
             (data->m_item_rain ? "ON" : "OFF")
         );

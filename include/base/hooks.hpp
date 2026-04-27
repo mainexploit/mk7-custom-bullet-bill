@@ -18,7 +18,6 @@ namespace base
         static constexpr size_t ItemObjBase_exit_BreakInner_index = 35;
         static constexpr size_t ItemObjBase_hasCollision_InUseState_index = 42;
         static constexpr size_t ItemObjBase_getShadowScale_index = 43;
-        static constexpr size_t ItemObjBase_getOffset_Multi_Y_index = 47;
         static constexpr size_t ItemObjBase_getOffset_Multi_Z_index = 48;
         static constexpr size_t ItemObjbase_getRotVelRatio_Multi_index = 49;
         static constexpr size_t ItemObjBase_getRadius_Multi_index = 50;
@@ -43,8 +42,10 @@ namespace base
         static void Item_ItemObjBase_stateStand(Item::ItemObjBase *);
         static void Item_ItemObjBase_calcImpl(Item::ItemObjBase *);
 
+        static NAKED void Item_ItemObjKoura_calc_GndColCheck_0x4E0();
         static NAKED void Sequence_BaseRacePage_sub_equipItem_0xAC();
         static NAKED void Item_ItemDirector_checkKartHitItem_0x590();
+        static NAKED void Item_ItemObjKoura_calc_GndColCheck_0xE0();
         static NAKED void Sequence_BaseRacePage_initMapIcon_0x814();
         static NAKED void Item_ItemObjBanana_calcOverState_0x178();
         static NAKED void Item_ItemObjBanana_stateSelfMove_0x20();
@@ -52,7 +53,6 @@ namespace base
         static void Item_ItemObjKiller_createInner(Item::ItemObjBase *, const Object::ArgumentObj);
         static bool Item_ItemObjKiller_hasCollision_InUseState(Item::ItemObjBase *);
         static float Item_ItemObjKiller_getRotVelRatio_Multi(Item::ItemObjBase *);
-        static float Item_ItemObjKiller_getOffset_Multi_Y(Item::ItemObjBase *);
         static float Item_ItemObjKiller_getOffset_Multi_Z(Item::ItemObjBase *);
         static void Item_ItemObjKiller_stateInitSelfMove(Item::ItemObjBase *);
         static float Item_ItemObjKiller_getBoxColRadius(Item::ItemObjBase *);

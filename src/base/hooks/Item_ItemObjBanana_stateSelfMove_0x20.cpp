@@ -21,6 +21,6 @@ namespace base
 
     extern "C" auto __change_stand_height(Item::ItemObjBase *item_obj, float height)
     {
-        return base::features::change_height(item_obj, height);
+        return base::features::change_stand_height(item_obj, height);
     }
 }

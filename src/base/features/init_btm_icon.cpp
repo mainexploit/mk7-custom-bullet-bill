@@ -8,19 +8,20 @@ namespace base
     {
         auto bg_race_map_item_control = reinterpret_cast<UI::BgRaceMapItemControl *>(reinterpret_cast<u32>(base_race_page) + 0x30A0);
 
-        auto item_control_array = &bg_race_map_item_control->m_controls[std::to_underlying(Item::eItemType::Killer)];
-        
-        auto item_obj_array = &Item::GetDirector()->m_killer_director->m_it.m_ptr_array;
-
-        if (item_control_array->capacity())
+        if (auto item_control = &bg_race_map_item_control->m_controls[std::to_underlying(Item::eItemType::Killer)])
         {
-            for (size_t i = 0; i < item_control_array->size(); i++)
+            if (item_control->capacity())
             {
-                auto entry = item_control_array->at(i);
+                auto item_objs = &Item::GetDirector()->m_killer_director->m_it.m_ptr_array;
 
-                entry->m_item_obj = item_obj_array->at(i);
+                for (size_t i = 0; i < item_control->size(); i++)
+                {
+                    auto entry = item_control->at(i);
 
-                memcpy(entry->m_tex_handle, bg_race_map_item_control->m_map_killer_r90_handle, sizeof(bg_race_map_item_control->m_map_killer_r90_handle));
+                    entry->m_item_obj = item_objs->at(i);
+
+                    memcpy(entry->m_tex_handle, bg_race_map_item_control->m_map_killer_r90_handle, sizeof(bg_race_map_item_control->m_map_killer_r90_handle));
+                }
             }
         }
     }

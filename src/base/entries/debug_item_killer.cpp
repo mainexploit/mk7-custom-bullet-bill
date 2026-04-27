@@ -55,9 +55,7 @@ namespace base
 
                 if (!utils::is_paused() && data->m_item_rain)
                 {
-                    auto race_state = System::g_root_system->get_race_director()->m_mode_manager->m_race_state;
-
-                    if (race_state != RaceSys::ModeManagerBase::RaceState_Race)
+                    if (!utils::in_race())
                     {
                         if (data->m_item_rain)
                         {

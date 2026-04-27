@@ -55,9 +55,11 @@ namespace base
 		void *m_UI_VisualControl_CreateArg_AnimationDefine_vtbl;
 		void *m_Item_ItemDirector_initAfterStructure_0x14;
 		void *m_Sequence_BaseRacePage_sub_equipItem_0xAC;
+		void *m_Item_ItemObjKoura_calc_GndColCheck_0x4E0;
 		void *m_Item_ItemDirector_checkKartHitItem_0x590;
 		void *m_Sequence_BaseRacePage_initMapIcon_0x6F8;
 		void *m_Sequence_BaseRacePage_initMapIcon_0x814;
+		void *m_Item_ItemObjKoura_calc_GndColCheck_0xE0;
 		void *m_Item_ItemObjBanana_calcOverState_0x178;
 		void *m_Item_ItemObjBanana_stateSelfMove_0x20;
 		void *m_Sequence_BaseRacePage_onPagePreStep;

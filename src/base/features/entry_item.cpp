@@ -9,6 +9,14 @@ namespace base
     {
         if (item_slot == Item::eItemSlot::Killer)
         {
+            if (kart_item->m_info_proxy->isNetRecv())
+            {
+                if (item_director->m_killer_director->entry(kart_item->m_info_proxy, true, -1))
+                    kart_item->setEquipInfo(item_slot, Item::eEquipType::Hang, 1, true);
+
+                return true;
+            }
+
             if (!kart_item->m_info_proxy->isMaster())
             {
                 item_director->m_killer_director->entry(kart_item->m_info_proxy, false, -1);

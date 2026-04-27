@@ -9,8 +9,9 @@ namespace base
 	{
 		static void item_reaction(Item::ItemObjBase *, Item::ItemObjBase *, Item::eItemReact *, Item::eItemReact *);
 		static bool entry_item(Item::ItemDirector *, Item::eItemSlot, Item::KartItem *);
+		static float calc_throw_height(Item::ItemObjBase *, float, float);
 		static void kart_reaction(Item::ItemObjBase *, Kart::Vehicle *);
-		static float change_height(Item::ItemObjBase *, float);
+		static float change_stand_height(Item::ItemObjBase *, float);
 		static void create_caption(Sequence::BaseRacePage *);
 		static void init_btm_icon(Sequence::BaseRacePage *);
 		static void calc_caption(Sequence::BaseRacePage *);

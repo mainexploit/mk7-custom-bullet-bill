@@ -43,15 +43,7 @@ namespace base
     bool    utils::in_race()
     {
         if (is_character_engine_valid())
-        {
-            if (auto race_director = System::g_root_system->get_race_director())
-            {
-                auto race_state = race_director->m_mode_manager->m_race_state;
-
-                return (race_state == RaceSys::ModeManagerBase::RaceState_Sync || race_state == RaceSys::ModeManagerBase::RaceState_Countdown
-                    || race_state == RaceSys::ModeManagerBase::RaceState_Race || race_state == RaceSys::ModeManagerBase::RaceState_Goal);
-            }
-        }
+            return (System::g_root_system->get_race_director() != nullptr);
 
         return false;
     }

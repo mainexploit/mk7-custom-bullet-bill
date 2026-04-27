@@ -79,7 +79,7 @@ namespace CTRPluginFramework
         settings.WaitTimeToBoot = Time::Zero;
         settings.SetThemeDefault();
 
-        settings.CachedDrawMode = true;
+        settings.CachedDrawMode = false;
 		settings.AllowActionReplay = false;
 		settings.AllowSearchEngine = false;
         settings.TryLoadSDSounds = false;

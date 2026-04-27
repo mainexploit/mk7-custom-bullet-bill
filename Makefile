@@ -128,8 +128,11 @@ $(BUILD): create_headers
 	@[ -d $@ ] || mkdir -p $@
 	@$(MAKE) --jobs=$(JOBS) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
 
-create_headers:
+create_headers: fetch_updates
 	@$(MAKE) --jobs=$(JOBS) --no-print-directory -C $(CURDIR)/vendor/mk7-memory -s
+
+fetch_updates:
+	@git submodule foreach 'git pull && git submodule update --init --recursive'
 
 #---------------------------------------------------------------------------------
 clean:

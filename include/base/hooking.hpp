@@ -36,8 +36,10 @@ namespace base
         hook_types::detour_hook m_Item_ItemObjBase_stateStand_hook;
         hook_types::detour_hook m_Item_ItemObjBase_calcImpl_hook;
         
+        hook_types::naked_hook m_Item_ItemObjKoura_calc_GndColCheck_0x4E0_hook;
         hook_types::naked_hook m_Sequence_BaseRacePage_sub_equipItem_0xAC_hook;
         hook_types::naked_hook m_Item_ItemDirector_checkKartHitItem_0x590_hook;
+        hook_types::naked_hook m_Item_ItemObjKoura_calc_GndColCheck_0xE0_hook;
         hook_types::naked_hook m_Sequence_BaseRacePage_initMapIcon_0x814_hook;
         hook_types::naked_hook m_Item_ItemObjBanana_calcOverState_0x178_hook;
         hook_types::naked_hook m_Item_ItemObjBanana_stateSelfMove_0x20_hook;
