@@ -46,7 +46,7 @@ namespace base
 
         base_page->m_set_item_to_all_manipulators = false;
 
-        base_page->m_controls_outside_manipulator_array.pushBack(caption);
+        base_page->m_both_controls.pushBack(caption);
 
         init(caption);
     }
