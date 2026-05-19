@@ -24,7 +24,7 @@ git clone <repo url> --depth=1 --recurse-submodules --shallow-submodules
 
 ## Credits
 - [CTRPF-RevolutionBase](https://github.com/Anto726/CTRPluginFramework-RevolutionBase)
-- [MK7-Patch-Collection](https://https://github.com/Bsquo/mk7-patch-collection)
+- [MK7-Patch-Collection](https://github.com/Bsquo/mk7-patch-collection)
 - [glaze (Fork by @Anto726)](https://github.com/Anto726/glaze)
 - [magic_enum](https://github.com/Neargye/magic_enum)
 - [MK7-Memory](https://github.com/mk7re/MK7-Memory)
